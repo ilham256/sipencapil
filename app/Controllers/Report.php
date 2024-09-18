@@ -214,7 +214,7 @@ class Report extends BaseController
 		$data['status'] = "";
 
         // Mengambil data mahasiswa dari API
-        $currentYear = 2024;
+        $currentYear = 2024; 
         $startYear = 2019;
         $tahun_report = range($startYear, $currentYear - 1);
 

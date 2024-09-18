@@ -7,7 +7,7 @@ use App\Models\UserModel;
 
 class AkunOperator extends BaseController
 {
-    protected $dosenModel;
+    protected $dosenModel; 
     protected $userModel;
 
     public function __construct()

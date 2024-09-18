@@ -353,6 +353,9 @@ $routes->get('/user/tambah_admin', 'User::tambah_admin');
 $routes->post('/user/submit_tambah_admin', 'User::submit_tambah_admin');
 $routes->get('/user/hapus_Admin/(:segment)', 'User::hapus_admin/$1');
 
+$routes->get('/user/reset', 'User::reset');
+$routes->post('/user/submit_reset', 'User::submit_reset');
+
 $routes->get('/user/dosen', 'User::dosen');
 $routes->get('/user/tambah_dosen', 'User::tambah_dosen');
 $routes->post('/user/submit_tambah_dosen', 'User::submit_tambah_dosen');

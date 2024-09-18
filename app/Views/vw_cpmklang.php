@@ -14,7 +14,26 @@
 							<div class="icon">
 								<i class="ion ion-university"></i>
 							</div>
-						</div>			
+						</div>
+						
+						<div class="card card-success">
+							<div class="card-header">
+								<h3 class="card-title"> <i class="nav-icon fas fa-file-excel"></i>&nbsp; Download Template Excel</h3>
+
+								<div class="card-tools">
+								<div class="input-group input-group-sm" style="width: 150px;">
+
+								</div>
+								</div> 
+							</div>
+							<!-- /.card-header -->
+							<!-- /.card-body -->
+							<div class="card-footer">
+							<a class="btn btn-success waves-effect waves-light" href="<?= base_url('docs/Format Nilai CPMK.xlsx') ?>" download="Format Nilai CPMK.xlsx"><i class="nav-icon fas fa-file-excel"></i>&nbsp; Download Template</a>
+							</div>
+							<!-- /.card-footer -->
+						<!-- /.card -->
+						</div>
 					</div>
 					
 					<div class="col-lg-4">
@@ -69,7 +88,7 @@
 								</div> 
 							</div> 
 							<!-- /.card-header -->
-							<div class="card-body">
+							<div class="card-body"> 
 								<div class="form-group">
 										<form role="form" id="contactform" action="<?php echo site_url('cpmklang/import')?>" method="post" enctype="multipart/form-data">
 										<input type="file" id="input-file-to-destroy" name="file" class="dropify" />

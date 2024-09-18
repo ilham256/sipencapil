@@ -103,6 +103,12 @@ class UserModel extends Model
         return true;
     }
 
+    public function submitReset($save_data)
+    {
+        $this->db->table($this->table)->replace($save_data);
+        return true;
+    }
+
     public function hapusUser($id)
     {
         $this->db->table($this->table)

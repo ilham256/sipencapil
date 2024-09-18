@@ -64,6 +64,7 @@ class PerbaikanMatakuliah extends BaseController {
         $data['content'] = 'perbaikan_matakuliah/tambah';
         $data['dosen'] = $this->dosenModel->getDosen();
         $data['mata_kuliah'] = $this->matakuliahModel->getMatakuliah();
+		//dd($data['dosen']);
 
         return view('vw_template', $data);
     }
@@ -81,7 +82,7 @@ class PerbaikanMatakuliah extends BaseController {
             ];
 
             if ($this->perbaikanModel->submitTambah($save_data)) {
-                return redirect()->to('/perbaikan_matakuliah');
+                return redirect()->to('/perbaikanmatakuliah');
             }
         }
     }
@@ -96,7 +97,7 @@ class PerbaikanMatakuliah extends BaseController {
             $id_edit = $this->request->getPost('id');
 
             if ($this->perbaikanModel->submitEdit($save_data, $id_edit)) {
-                return redirect()->to('/perbaikan_matakuliah');
+                return redirect()->to('/perbaikanmatakuliah');
             }
         }
     }
@@ -258,7 +259,7 @@ class PerbaikanMatakuliah extends BaseController {
    public function hapus($id)
     {
         if ($this->perbaikanModel->hapus($id)) {
-            return redirect()->to('/perbaikan_matakuliah');
+            return redirect()->to('/perbaikanmatakuliah');
         }
     }
 

@@ -18,7 +18,7 @@ class Dosen extends Controller {
             exit(); 
     	}
   	}
-
+ 
 	public function index()
 	{ 
 		$data['breadcrumbs'] = 'dosen'; 

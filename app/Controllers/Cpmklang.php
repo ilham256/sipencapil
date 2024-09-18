@@ -132,7 +132,7 @@ class Cpmklang extends BaseController
                     $highestColumn = $sheet->getHighestColumn();
                     if ($highestRow == 1000) {
                         $highestRow = 250 ;
-                    }
+                    } 
 
                     $row_mk = $sheet->rangeToArray('A' . 13 . ':' . $highestColumn . 13,
                                                         NULL,

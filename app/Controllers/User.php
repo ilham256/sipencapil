@@ -141,4 +141,27 @@ class User extends BaseController
 		session()->setFlashdata('success', 'Data berhasil dihapus!');
         return redirect()->to('/user/mahasiswa');
 	}
+
+	public function reset()
+	{
+		$data['breadcrumbs'] = 'Dashboard';
+		$data['content'] = 'login_operator/vw_reset';
+		return view('vw_template_operator', $data);
+	}
+
+	public function submit_reset()
+	{
+		if ($this->request->getPost('simpan')) {
+			$save_data = [
+				'id' => $this->request->getPost('username'),
+				'username' => $this->request->getPost('username'),
+				'password' => password_hash($this->request->getPost('username'), PASSWORD_DEFAULT),
+			];
+			$query = $this->userModel->submitReset($save_data);
+			if ($query) {
+				session()->setFlashdata('success', 'Password berhasil direset!');
+                return redirect()->to('/user/reset');
+			}
+		}
+	}
 }

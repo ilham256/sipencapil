@@ -71,6 +71,15 @@ class ReportMahasiswa extends BaseController
 	$data['kurikulum_mahasiswa'] = $data_kurikulum_mahasiswa[0]->kode_kurikulum;
 
     $data['data_cpl'] = $this->kinumumModel->getCpl($data['kurikulum_mahasiswa']);
+
+    usort($data['data_cpl'], function($a, $b) {
+            // Ambil angka dari id_cpl_langsung untuk dibandingkan
+            $a_number = (int) str_replace('CPL_', '', $a->id_cpl);
+            $b_number = (int) str_replace('CPL_', '', $b->id_cpl);
+            
+            return $a_number - $b_number;
+        });
+        
     $rumus_cpl = $this->kinumumModel->getCplRumusDeskriptor($data['kurikulum_mahasiswa']);
     $rumus_deskriptor = $this->kinumumModel->getDeskriptorRumusCpmk($data['kurikulum_mahasiswa']);
     $nilai_cpmk = $this->kinumumModel->getNilaiCpmk();

@@ -81,7 +81,7 @@ class EvaluasiLDosen extends BaseController {
         $rumus_deskriptor = $this->kinumum_model->getDeskriptorRumusCpmkKurikulumTerpilih($arr['kurikulum_terpilih']);
         $nilai_cpmk = $this->kinumum_model->getNilaiCpmk();
 
-        $tahun_min = 2019;
+        $tahun_min = 2020;
         $tahun_max = 2020;
 
         $target = $this->katkin_model->getKatkin();

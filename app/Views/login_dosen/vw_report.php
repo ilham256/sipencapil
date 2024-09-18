@@ -129,7 +129,7 @@
 							<div>
 
 							</div>
-							
+							 
 						</div> 
 					<div class="row small-spacing">
 						<div class="col-xs-12">
@@ -195,9 +195,9 @@
 
 										<?php for ($i=0; $i < count($data_cpl); $i++) { ?>
 										<tr> 
-											<th scope="row"><?php  echo substr($data_cpl[$i]->nama,-1); ?></th> 
+											<th scope="row"><?php  echo $data_cpl[$i]->nama ; ?></th>  
 											<td style="text-align: justify; "><p><?php  echo ($data_cpl[$i]->deskripsi); ?></p></td> 
-											<td style="text-align: center; "><?php echo round($nilai_cpl_mahasiswa[$i]); ?></td> 
+											<td style="text-align: center; "><?php echo (round($nilai_cpl_mahasiswa[$i],2)); ?></td>  
 											<td><?php echo $status_nilai_cpl_mahasiswa[$i]; ?></td> 
 										</tr> 
 										<?php } ?>

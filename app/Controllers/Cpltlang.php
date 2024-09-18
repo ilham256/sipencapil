@@ -92,7 +92,7 @@ class Cpltlang extends BaseController {
             //konfersi dari funsion uploads
             $arr['datas'] = [];
             $arr['datas_relevansi_ppm'] = [];
-            $arr['datas_cpl'] = $this->cpltlang_model->getcpl();
+            $arr['datas_cpl'] = $this->cpltlangModel->getcpl();
 
             //Menyimpan Data Persheet
             for ($p=0; $p < $highestSheet; $p++) { 
@@ -128,7 +128,7 @@ class Cpltlang extends BaseController {
                                                         FALSE);
                         //Sesuaikan sama nama kolom tabel di database  
 
-                        $data_cek =  $this->cpltlang_model->cekcpl($key);
+                        $data_cek =  $this->cpltlangModel->cekcpl($key);
 
                         if (empty($data_cek)) {
                             $save_data = array(
@@ -162,7 +162,7 @@ class Cpltlang extends BaseController {
                          
                         array_push($arr['datas'],$masukan);
 
-                        $insert = $this->cpltlang_model->updateexcel($save_data);
+                        $insert = $this->cpltlangModel->updateexcel($save_data);
                         //delete_files($media['file_path']);
                              
                         }
@@ -181,7 +181,7 @@ class Cpltlang extends BaseController {
         //echo '<pre>';  var_dump($arr['datas']); echo '</pre>';
         $arr['breadcrumbs'] = 'cpltlang';
         $arr['content'] = 'vw_data_nilai_berhasil_disimpan5';
-        $this->load->view('vw_template', $arr);
+        return view('vw_template', $arr);
 
 
     }

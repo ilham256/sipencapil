@@ -24,10 +24,10 @@
                       <label for="exampleInputEmail1">Nama Dosen</label>
                       <select id="mata_kuliah" class="form-select" name="dosen">
                         <?php $i = 1; foreach($dosen as $d) { ?>
-                        <option value="<?php echo $d->NIP; ?>"><?php echo $d->NIP.' ('.$d->nama_dosen.')'; ?></option>
+                        <option value="<?php echo $d["NIP"]; ?>"><?php echo $d["NIP"].' ('.$d["nama_dosen"].')'; ?></option>
                         <?php $i++; } ?>
                       </select>
-                    </div>
+                    </div> 
                     <br>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Tahun</label>

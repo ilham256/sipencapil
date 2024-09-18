@@ -58,7 +58,7 @@
 												Nomor Induk Mahasiswa
 											</div>
 											<div class="col-md-6 col-xs-12" style='font-weight: bold; color: darkblue;'>
-												Tahun Masuk
+												Kurikulum
 											</div>
 											
 										</div>
@@ -67,10 +67,10 @@
 												<?php echo $nim_rapor_mahasiswa; ?>
 											</div>
 											<div class="col-md-6 col-xs-12" style='font-weight: bold; color: grey;'>
-												-
+												<?php echo $kurikulum_mahasiswa; ?>
 											</div>
 										</div>
-										<br>
+										<br> 
 										<table class="table"> 
 											<thead style="background-color: darkblue; color: white; vertical-align: middle; ">
 												<tr>
@@ -84,9 +84,9 @@
 
 												<?php for ($i=0; $i < count($data_cpl); $i++) { ?>
 												<tr> 
-													<th scope="row"><?php  echo substr($data_cpl[$i]->nama,-1); ?></th> 
+													<th scope="row"><?php  echo $data_cpl[$i]->nama ; ?></th> 
 													<td style="text-align: justify; "><p><?php  echo ($data_cpl[$i]->deskripsi); ?></p></td> 
-													<td style="text-align: center; "><?php echo round($nilai_cpl_mahasiswa[$i]); ?></td> 
+													<td style="text-align: center; "><?php echo (round($nilai_cpl_mahasiswa[$i],2)); ?></td>  
 													<td><?php echo $status_nilai_cpl_mahasiswa[$i]; ?></td> 
 												</tr> 
 												<?php } ?>
@@ -94,13 +94,6 @@
 										</table>
 										<div class="float-end margin-top-50">
 
-											<form role="form" id="contactform" action="<?php echo site_url('Reportmahasiswa/download_report_mahasiswa')?>" method="post" target="_blank">
-
-												<input type="hidden" name="nim_2" value="<?php echo $nim_rapor_mahasiswa; ?>">
-
-												<button onclick="return confirm('Apakah anda ingin mencetak report ?')" type="submit" class="btn btn-default waves-effect waves-light" name="download" value="download"><i class='fa fa-download'></i> Download</button>
-
-											</form>
 
 											
 										</div>
@@ -136,11 +129,7 @@
 											}
 										?>
 									</div>
-									<form>
-									<div class="float-end margin-top-30">
-										<button type="button" class="btn btn-default waves-effect waves-light"><i class='fa fa-download'></i> Download</button>
-									</div>
-									</form>
+
 										
 								</div>
 							</div>
