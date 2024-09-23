@@ -71,35 +71,27 @@
 							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: #216a8d;'>
 								Nama Lengkap
 							</div>
-							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: #216a8d;'>
-								Tempat, Tanggal Lahir
-							</div>
+
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: grey;'>
 								<?php echo $nama_rapor_mahasiswa; ?>
 							</div>
-							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: grey;'>
-								-
-							</div>
+
 						</div>
 						<br>
 						<div class="row">
 							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: #216a8d;'>
 								Nomor Induk Mahasiswa
 							</div>
-							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: #216a8d;'>
-								Tahun Masuk
-							</div>
+
 							
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: grey;'>
 								<?php echo $nim_rapor_mahasiswa; ?>
 							</div>
-							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: grey;'>
-								-
-							</div>
+
 						</div> 
 						<br>
 						<table class="table"> 
