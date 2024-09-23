@@ -22,7 +22,8 @@
 							</div>
 							<!-- /.card-body -->
 							<div class="card-footer">
-								<button type="submit" class="btn btn-secondary" name="pilih_2" value="pilih_2" style="background-color: #216a8d; color: #FFFFFF;">Tampilkan</button> 
+								<button type="submit" class="btn btn-secondary" name="pilih_2" value="pilih_2" style="background-color: #216a8d; color: #FFFFFF;">Tampilkan</button>
+								
 							</div>
 							</form>
 							<!-- /.card-footer -->
@@ -50,7 +51,8 @@
 			</div>
 
 			<?php if ($status == 'tampilkan') { ?>
-			<div class="card card-dark">
+			
+			<div class="card card-dark" id="printCard">
 				<div class="card-header" style="background-color: #216a8d; color: #FFFFFF;">
 				</div>
 				<div class="card-body">	
@@ -127,7 +129,9 @@
 
 								<input type="hidden" name="nim" value="<?php echo $nim_rapor_mahasiswa; ?>">
 
-								<button type="submit" class="btn btn-default waves-effect waves-light" name="pilih" value="pilih"> Periksa Kekurangan Nilai</button>
+								<button type="submit" class="btn btn-default waves-effect waves-light" name="pilih" value="pilih"><i class="nav-icon fas fa-search"></i>&nbsp; Periksa Kekurangan Nilai</button>
+								<button class="btn btn-primary" onclick="printDiv()"><i class="nav-icon fas fa-print"></i>&nbsp; Cetak Laporan Mahasiswa</button>
+								
 
 							</form>
 
@@ -151,7 +155,17 @@
 <script src="<?php echo base_url() ?>plugin/chart/node_modules/chartjs-plugin-error-bars/node_modules/chart.js/dist/Chart.bundle.min.js"></script>
 <script src="<?php echo base_url() ?>plugin/chart/node_modules/chartjs-plugin-error-bars/build/Plugin.Errorbars.js"></script>
 
+ <script>
+    function printDiv() {
+        var printContents = document.getElementById('printCard').innerHTML;
+        var originalContents = document.body.innerHTML;
 
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        window.location.reload(); // Reload halaman untuk memastikan tampilan kembali normal
+    }
+</script>
 
  
 
