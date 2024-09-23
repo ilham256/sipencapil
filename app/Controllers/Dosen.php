@@ -18,7 +18,7 @@ class Dosen extends Controller {
             exit(); 
     	}
   	}
- 
+  
 	public function index()
 	{ 
 		$data['breadcrumbs'] = 'dosen'; 
@@ -90,5 +90,15 @@ class Dosen extends Controller {
         $arr['content'] = 'vw_data_berhasil_disimpan';
 
         echo view('vw_template', $arr);
+    }
+
+	public function hapus($id)
+    {
+        $delete = $this->dosen_model->hapus($id);
+		$delete2 = $this->user_model->hapusUser($id);
+        if ($delete) {
+            session()->setFlashdata('success', 'Dosen'.$id.' berhasil dihapus!');
+            return redirect()->to('/dosen');
+        }
     }
 }

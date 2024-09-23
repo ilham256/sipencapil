@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class DosenModel extends Model
+class DosenModel extends Model 
 {
     protected $table = 'dosen'; // Nama tabel
     protected $primaryKey = 'NIP'; // Primary key
@@ -52,7 +52,8 @@ class DosenModel extends Model
 
     public function hapus($id)
     {
-        return $this->where('nim', $id)->delete();
+        return $this->where('NIP', $id)
+                    ->delete();
     }
 }
 ?>

@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Models\Cpmklangmodel;
-use App\Models\Mahasiswamodel;
-use App\Models\Matakuliahmodel;
+use App\Models\CpmklangModel;
+use App\Models\MahasiswaModel;
+use App\Models\MatakuliahModel;
 use App\Models\KurikulumTerpilihModel;
 use CodeIgniter\Controller;
 
@@ -24,9 +24,9 @@ class Cpmklang extends BaseController
 
     public function __construct()
     {
-        $this->cpmklang_model = new Cpmklangmodel();
-        $this->Matakuliah_model = new Matakuliahmodel();
-        $this->Mahasiswa_model = new Mahasiswamodel();
+        $this->cpmklang_model = new CpmklangModel();
+        $this->Matakuliah_model = new MatakuliahModel();
+        $this->Mahasiswa_model = new MahasiswaModel();
         $this->kurikulumTerpilihModel = new KurikulumTerpilihModel();
 
         $this->session = session();

@@ -111,6 +111,7 @@ $routes->get('dosen/tambah', 'Dosen::tambah');
 $routes->post('dosen/submit_tambah', 'Dosen::submit_tambah');
 $routes->get('dosen/export_excel', 'Dosen::export_excel');
 $routes->get('dosen/suksesSimpan', 'Dosen::suksesSimpan');
+$routes->get('dosen/hapus/(:any)', 'Dosen::hapus/$1');
 
 $routes->get('efektivitascpl', 'EfektivitasCpl::index');
 $routes->post('efektivitascpl/import', 'EfektivitasCpl::import');

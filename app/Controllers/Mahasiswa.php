@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\mahasiswaModel;
+use App\Models\MahasiswaModel;
 use CodeIgniter\Controller;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as ReaderXlsx;
@@ -14,7 +14,7 @@ class Mahasiswa extends Controller {
     protected $mahasiswaModel;
 
     public function __construct() {
-        $this->mahasiswaModel = new mahasiswaModel();
+        $this->mahasiswaModel = new MahasiswaModel();
         $session = session();
         if (!$session->get('loggedin') || $session->get('level') != 0) {
            header('Location: ' . base_url('Auth/login'));
@@ -34,63 +34,6 @@ class Mahasiswa extends Controller {
         $data['breadcrumbs'] = 'mahasiswa';
         $data['content'] = 'mahasiswa/tambah';
         echo view('vw_template', $data);
-    }
-
-    public function submitTambah() {
-        $request = \Config\Services::request();
-
-        if ($request->getPost('simpan')) {
-            $tahun = $request->getPost('tahun');
-
-            function curl($url) {
-                $ch = curl_init();
-                $headers = array(
-                    'accept: text/plain',
-                    'X-IPBAPI-TOKEN: Bearer 86f2760d-7293-36f4-833f-1d29aaace42e'
-                );
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                $output = curl_exec($ch);
-                curl_close($ch);
-                return $output;
-            }
-
-            $send = curl("https://api.ipb.ac.id/v1/Mahasiswa/DaftarMahasiswa/PerDepartemen?departemenId=160&strata=S1&tahunMasuk=" . $tahun);
-            $data_mahasiswa = json_decode($send, TRUE);
-            $masukan = [];
-
-            foreach ($data_mahasiswa as $key) {
-                $save_data = [
-                    "nim" => $key["Nim"],
-                    "nama" => $key["Nama"],
-                    "SemesterMahasiswa" => $key["SemesterMahasiswa"],
-                    "StatusAkademik" => $key["StatusAkademik"],
-                    "tahun_masuk" => $tahun
-                ];
-
-                array_push($masukan, $save_data);
-                $this->mahasiswaModel->updateMahasiswa($save_data);
-
-                $cek_id = $this->mahasiswaModel->cekUserMahasiswa($key["Nim"]);
-                if (empty($cek_id)) {
-                    $save_data_user = [
-                        'id' => $key["Nim"],
-                        'username' => $key["Nim"],
-                        'email' => '',
-                        'password' => password_hash('admin', PASSWORD_DEFAULT),
-                        'level' => 2,
-                    ];
-                    $this->mahasiswaModel->updateUserMahasiswa($save_data_user);
-                }
-            }
-
-            $data['datas'] = $masukan;
-            $data['datas_tahun'] = $tahun;
-            $data['breadcrumbs'] = 'mahasiswa';
-            $data['content'] = 'mahasiswa/vw_data_mahasiswa_berhasil_disimpan';
-            echo view('vw_template', $data);
-        }
     }
 
     public function exportExcel() {

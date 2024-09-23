@@ -13,7 +13,7 @@ use PhpOffice\PhpSpreadsheet\Reader\Csv;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
-class Cpmktlang extends BaseController {
+class Cpmktlang extends BaseController { 
 
     protected $cpmktlangModel;
     protected $matakuliahModel;
