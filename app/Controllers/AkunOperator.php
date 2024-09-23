@@ -59,7 +59,7 @@ class AkunOperator extends BaseController
                     'password' => password_hash($password_baru, PASSWORD_DEFAULT),
                 ];
                 $id = session()->get('id');
-                $this->userModel->update_password($save_data, $id);
+                $this->userModel->updatePassword($save_data, $id);
 
                 $data['konfirmasi'] = 'benar';
             }
