@@ -45,7 +45,6 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Menghapus Matakuliah berpotensi menghilangkan data Formula CPL Kurikulum Terkait yang sudah diinput !</p>
                                     <p>Apakah anda yakin akan tetap menghapus data?</p>
                                 </div>
                                 <div class="modal-footer justify-content-between">
