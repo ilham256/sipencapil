@@ -148,7 +148,7 @@
 										<?php foreach($datas as $w) { ?>
 												<?php if ($w->nim == $r["nim"]) {
 													if ($row->id_matakuliah_has_cpmk == $w->id_matakuliah_has_cpmk) {
-														echo $w->nilai_langsung;
+														echo round($w->nilai_langsung);
 													} } } ?>
 			                    	</td>
 									<?php } ?>
