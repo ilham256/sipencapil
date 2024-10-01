@@ -115,7 +115,7 @@
 			<?php if ($status_list_nilai == 'tampilkan') { ?>
 				<div class="card card-secondary">
 					<div class="card-header">
-						<h3 class="card-title"> <i class="nav-icon fas fa-file-alt"></i>&nbsp; List Nilai CPMK - Langsung (Angkatan <?php echo $simpanan_tahun	;?>) Matakuliah : <?php echo $simpanan_mk	;?></h3>
+						<h3 class="card-title"> <i class="nav-icon fas fa-file-alt"></i>&nbsp; List Nilai CPMK - Langsung (Angkatan <?php echo $simpanan_tahun	;?>) Matakuliah : <?php echo $simpanan_mk.$simpanan_nama_mk	;?></h3>
 					</div> 
 					<div class="card-body">
 						<table id="example1" class="table table-bordered table-striped" style="width:100%">
