@@ -80,10 +80,10 @@ class User extends BaseController
 	{
 		if ($this->request->getPost('simpan')) {
 			$save_data = [
-				'id' => $this->request->getPost('username', true),
-				'username' => $this->request->getPost('username', true),
-				'email' => $this->request->getPost('email', true),
-				'password' => password_hash($this->request->getPost('password', true), PASSWORD_DEFAULT),
+				'id' => $this->request->getPost('username'),
+				'username' => $this->request->getPost('username'),
+				'email' => $this->request->getPost('email'),
+				'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
 				'level' => 1,
 			];
 			$query = $this->userModel->submitTambahDosen($save_data);
@@ -121,10 +121,10 @@ class User extends BaseController
 	{
 		if ($this->request->getPost('simpan')) {
 			$save_data = [
-				'id' => $this->request->getPost('username', true),
-				'username' => $this->request->getPost('username', true),
-				'email' => $this->request->getPost('email', true),
-				'password' => password_hash($this->request->getPost('password', true), PASSWORD_DEFAULT),
+				'id' => $this->request->getPost('username'),
+				'username' => $this->request->getPost('username'),
+				'email' => $this->request->getPost('email'),
+				'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
 				'level' => 2,
 			];
 			$query = $this->userModel->submitTambahMahasiswa($save_data);

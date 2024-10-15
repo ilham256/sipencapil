@@ -41,6 +41,16 @@ class KinumumModel extends Model
             ->getResult();
     }
 
+    public function getdataCpl($id)  
+    {
+        return $this->db->table($this->tableCplLangsung)
+            ->select('*')
+            ->where('cpl_langsung.id_cpl_langsung', $id)
+            ->get()
+            ->getRow();
+    }
+
+
     public function getCplRumusDeskriptor($id)  
     {
         return $this->db->table($this->tableCplRumusDeskriptor)

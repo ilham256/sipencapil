@@ -63,9 +63,11 @@
 			
 			<hr>
 				<div> 
-					<p >Data Kinerja  <?php echo $simpanan_cpl; ?> </p>
-					<p>Tahun Angkatan (<?php echo $tahun; ?>)</p>
-				</div>	
+					Data Kinerja  <?php echo $data_simpanan_cpl->nama.' Kurikulum '.$data_simpanan_cpl->kode_kurikulum; ?> <br>
+					<?php echo $data_simpanan_cpl->deskripsi; ?> <br>
+					Tahun Angkatan (<?php echo $tahun; ?>)
+				</div>
+			<hr>
 			<div class="col-md-12 col-sm-12" style="">
 				<canvas id="pemenuhan_cpl_tahun" class="chartjs-chart" width="480" height="320"></canvas>
 			</div>

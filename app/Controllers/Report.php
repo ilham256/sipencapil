@@ -89,6 +89,9 @@ class Report extends BaseController
 			$arr['status'] = "tampilkan";
         }
 
+		//data simpanan CPL 
+		$arr['data_simpanan_cpl'] = $this->kinumumModel->getdataCpl($arr['simpanan_cpl']);
+		//dd($arr['data_simpanan_cpl']);
 		// Mengecek Kuikulum yang digunakan Mahasiswa
 		$data_kurikulum_mahasiswa = $this->mahasiswaModel->getMahasiswaKurikulum($arr['nim_3']);
 		$arr['kurikulum_mahasiswa'] = $data_kurikulum_mahasiswa[0]->kode_kurikulum;

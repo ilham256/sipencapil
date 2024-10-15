@@ -78,6 +78,9 @@ class Kincpl extends Controller
             $data['simpanan_cpl'] = $cpl_1;
         }
 
+        //data simpanan CPL 
+		$data['data_simpanan_cpl'] = $this->kinumumModel->getdataCpl($data['simpanan_cpl']);
+
         $mahasiswa_2 = $this->kinumumModel->getMahasiswaTahun($data['tahun']);
         $mahasiswa = [];
 

@@ -58,7 +58,8 @@
 			<?php if ($status == 'tampilkan') { ?>
 			<div class="card card-dark">
 				<div class="card-header" style="background-color: #FF6F61; color: #FFFFFF;">
-					Data Kinerja  <?php echo $simpanan_cpl; ?>
+				Data Kinerja  <?php echo $data_simpanan_cpl->nama.' Kurikulum '.$data_simpanan_cpl->kode_kurikulum; ?> <br>
+				<?php echo $data_simpanan_cpl->deskripsi; ?>
 				</div>				
 				<div class="card-body">
 					<?php 
@@ -76,7 +77,7 @@
 					</div>
 				</div> 
 			</div>
-			<?php } ?>
+			<?php } ?> 
 		</div>		
 		<!-- /.box-content -->
 	</div>
