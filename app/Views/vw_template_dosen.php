@@ -52,7 +52,7 @@
     <!-- Brand Logo -->
     <a href="<?php echo site_url() ?>"  class="brand-link">
       <img src="<?= base_url('Adminlte/dist/img/IPB.jfif') ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Teknik Sipil IPB</span>
+      <span class="brand-text font-weight-light">Teknik Sipil dan Lingkungan IPB</span>
     </a>
 
     <!-- Sidebar -->
