@@ -17,8 +17,8 @@
 								<div class="row">
 									<div class="col-md-20 col-xs-20 text-center">
 										<p><strong>INSTITUT PERTANIAN BOGOR<br>
-										DEPARTEMEN TEKNOLOGI INDUSTRI PERTANIAN<br>
-										P.S. TEKNIK INDUSTRI PERTANIAN
+										DEPARTEMEN TEKNIK SIPIL DAN LINGKUNGAN<br>
+										P.S. TEKNIK SIPIL DAN LINGKUNGAN
 										<br><br>
 										</strong>
 										</p>

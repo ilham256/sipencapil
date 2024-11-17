@@ -417,7 +417,7 @@
 			<div class="row">
 				<div class="col-lg-5 mb-3">
 					<ul class="list-unstyled">
-						<li class="mb-2">2021 © Departemen Teknologi Industri Pertanian</li>
+						<li class="mb-2">2021 © DEPARTEMEN TEKNIK SIPIL DAN LINGKUNGAN</li>
 					</ul>
 				</div>
 				<div class="col-6 col-lg-1 mb-3">
