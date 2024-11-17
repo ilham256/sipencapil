@@ -36,7 +36,9 @@ class DosenModel extends Model
 
     public function submitEdit($saveData, $idEdit)
     {
-        return $this->update($idEdit, $saveData);
+        return $this->db->table($this->table)
+            ->where('NIP', $idEdit)
+            ->update($saveData);
     }
 
     public function updateDosen($saveData)

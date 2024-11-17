@@ -29,11 +29,44 @@
                     <tr>
                         <td scope="row"><?php echo $i; ?></td>
                         <td><span class="label label-success"><?php echo $r["NIP"]; ?></span></td>
-                        <td><?php echo ucwords(strtolower($r["nama_dosen"])); ?></td>
+                        <td><a href="#" data-toggle="modal" data-target="#editModal<?= $r["NIP"] ?>"><?php echo $r["nama_dosen"]; ?></a></td>
 						<td>
                         <a href="#" data-toggle="modal" data-target="#hapusModal<?= $r["NIP"] ?>"><i class="fa fa-trash" title="Hapus Data produk"></i></a>
                         </td>
                     </tr>
+
+					<div class="modal fade" id="editModal<?= $r["NIP"] ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel<?= $r["NIP"] ?>" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">Edit Dosen </h4>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<form method="post" action="<?php echo site_url('dosen/submit_edit') ?>" enctype="multipart/form-data">
+							<div class="modal-body">			
+								<div class="form-group">
+									<label for="exampleInputEmail1">NIP</label>
+									<input type="text" class="form-control" id="exampleInputEmail1" placeholder="<?php echo $r["NIP"]	;?>" name="nip" maxlength="10" disabled>
+									<input type="hidden" name="nip" value="<?php echo $r["NIP"]	;?>">
+								</div>
+								<div class="form-group">
+									<label for="exampleInputEmail1">Nama Dosen</label>
+									<input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $r["nama_dosen"]	;?>" name="nama" maxlength="100" required>
+								</div>
+
+							</div>
+							<div class="modal-footer justify-content-between">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary" name="simpan" value="simpan" onclick="return confirm('Save Data ?')" >Simpan</button>
+							</div>
+							</form>
+							</div>
+							<!-- /.modal-content -->
+						</div>								
+						<!-- /.modal-dialog -->
+					</div>					
 
 					<div class="modal fade" id="hapusModal<?= $r["NIP"] ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel<?= $r["NIP"] ?>" aria-hidden="true">
                             <div class="modal-dialog">

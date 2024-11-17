@@ -109,6 +109,7 @@ $routes->post('data/data_persentase_nilai_masuk', 'Data::data_persentase_nilai_m
 $routes->get('dosen', 'Dosen::index');
 $routes->get('dosen/tambah', 'Dosen::tambah');
 $routes->post('dosen/submit_tambah', 'Dosen::submit_tambah');
+$routes->post('dosen/submit_edit', 'Dosen::submit_edit');
 $routes->get('dosen/export_excel', 'Dosen::export_excel');
 $routes->get('dosen/suksesSimpan', 'Dosen::suksesSimpan');
 $routes->get('dosen/hapus/(:any)', 'Dosen::hapus/$1');

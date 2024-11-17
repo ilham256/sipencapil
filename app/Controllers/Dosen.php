@@ -73,6 +73,25 @@ class Dosen extends Controller {
 		} 
 	}
 
+	public function submit_edit()
+    {
+        if ($this->request->getPost('simpan')) {
+            $save_data = [
+                'NIP' => $this->request->getPost('nip', FILTER_SANITIZE_STRING),
+                'nama_dosen' => $this->request->getPost('nama', FILTER_SANITIZE_STRING),
+				'password' => "123456",
+            ];
+            $id_edit = $this->request->getPost('nip', FILTER_SANITIZE_STRING);
+			//dd($save_data);
+            $query = $this->dosen_model->submitEdit($save_data, $id_edit);
+            if ($query) {
+				session()->setFlashdata('success', 'Data berhasil disimpan!');
+                return redirect()->to('/dosen');
+            }
+        }
+    }
+
+
 	public function export_excel()
 	{
 		$data_dosen = $this->dosen_model->getdosen();
