@@ -41,7 +41,7 @@
 								<select id="cpl" class="form-select" name="mk">
 									<option value="<?php echo $simpanan_mk; ?>" style="background: lightblue;"><?php echo $simpanan_mk; ?></option>
 									<?php $i = 1; foreach($mata_kuliah as $d) { ?>
-									<option value="<?php echo $d->kode_mk; ?>"><?php echo $d->nama_kode_2." (".$d->nama_mata_kuliah.")"; ?></option>
+									<option value="<?php echo $d->kode_mk; ?>"><?php echo $d->kode_mk." (".$d->nama_mata_kuliah.")"; ?></option>
 									<?php $i++; } ?>
 								</select>
 								<button type="submit" class="btn btn-primary" name="pilih_4" value="pilih_4">Pilih</button> 
@@ -74,18 +74,10 @@
 								</div>
 								<div class="row">
 									<div class="col-md-3 col-xs-12">
-										Kode TM-2018 & 2019
+										Kode
 									</div>
 									<div class="col-md-6 col-xs-12">
-										<?php echo $data_mk["0"]->nama_kode; ?>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-3 col-xs-12">
-										Kode K-2020
-									</div> 
-									<div class="col-md-6 col-xs-12">
-										<?php echo $data_mk["0"]->nama_kode_2; ?>
+										<?php echo $data_mk["0"]->kode_mk; ?>
 									</div>
 								</div>
 								<div class="row">
@@ -250,19 +242,7 @@
 									</div>
 								</div>
 								<br>
-								<div class="float-end margin-top-50">
-
-									<form role="form" id="contactform" action="<?php echo site_url('report_dosen/download_report_mata_kuliah')?>" method="post" target="_blank">
-
-										<input type="hidden" name="tahun" value="<?php echo $tahun_mk ?>">
-										<input type="hidden" name="mk" value="<?php echo $simpanan_mk ?>">
-
-										<button onclick="return confirm('Apakah anda ingin mencetak report ?')" type="submit" class="btn btn-default waves-effect waves-light" name="download" value="download"><i class='fa fa-download'></i> Download</button>
-
-									</form>
-
-									
-								</div>
+								<div class="float-end margin-top-50"></div>
 							</div>
 							<!-- /.invoice-box -->
 						</div>
