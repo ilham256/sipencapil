@@ -10,6 +10,7 @@ use App\Models\KinumumModel;
 use App\Models\KincplModel;
 use App\Models\KincpmkModel;
 use App\Models\ReportModel;
+use App\Models\KurikulumModel;
 use App\Models\KurikulumTerpilihModel;
 use CodeIgniter\Controller;
 
@@ -23,6 +24,7 @@ class EvaluasiLDosen extends BaseController {
     protected $kincplModel;
     protected $kincpmkModel;
     protected $reportModel;
+    protected $kurikulumModel;
     protected $kurikulumTerpilihModel;
 
     public function __construct()
@@ -35,6 +37,7 @@ class EvaluasiLDosen extends BaseController {
         $this->kincpl_model = new KincplModel();
         $this->kincpmk_model = new KincpmkModel();
         $this->report_model = new ReportModel();
+        $this->kurikulumModel = new KurikulumModel();
         $this->kurikulumTerpilihModel = new KurikulumTerpilihModel();
 
         $session = session();
@@ -47,12 +50,16 @@ class EvaluasiLDosen extends BaseController {
     public function index()
     { 
         $arr['breadcrumbs'] = 'evaluasi_l';
-        $arr['content'] = 'analisis_evaluasi_pengukuran_langsung/analisis_kinerja_cpl_vw';
+        $arr['content'] = 'analisis_evaluasi_pengukuran_langsung_dosen/analisis_kinerja_cpl_vw';
 
         $arr['status_list_nilai'] = "sembunyikan";
         $kurikulum_terpilih = $this->kurikulumTerpilihModel->get();
         //dd($kurikulum_terpilih[0]->kode_kurikulum);
+        $arr['kurikulum'] = $this->kurikulumModel->get("asc");
         $arr['kurikulum_terpilih'] = $kurikulum_terpilih[0]['kode_kurikulum'];
+        if ($this->request->getPost('pilih')) {
+            $arr['kurikulum_terpilih'] = $this->request->getPost('kode');
+        }
 
         $arr['data_semester'] = $this->Matakuliah_model->getSemester();
         $arr['tahun_masuk'] = $this->mahasiswa_model->getTahunMasuk();
@@ -201,7 +208,7 @@ class EvaluasiLDosen extends BaseController {
      public function evaluasiKinerjaCpl()
     {
         $arr['breadcrumbs'] = 'evaluasi_l';
-        $arr['content'] = 'analisis_evaluasi_pengukuran_langsung/evaluasi_kinerja_cpl_vw';
+        $arr['content'] = 'analisis_evaluasi_pengukuran_langsung_dosen/evaluasi_kinerja_cpl_vw';
 
         $arr['semester'] = $this->kincplModel->getSemester();
         $arr['cpl'] = $this->kincplModel->getCpl();

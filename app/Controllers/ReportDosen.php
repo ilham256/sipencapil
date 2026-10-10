@@ -518,7 +518,7 @@ class ReportDosen extends BaseController
 		}
 
 		$data['data_mk'] = $this->reportModel->getDataMk($data['simpanan_mk']);
-
+        //dd ($data['data_mk']);
 		// dari Database
 		$mahasiswa_2 = $this->kinumumModel->getMahasiswaTahun($data['tahun_mk']);
 		$mahasiswa = [];

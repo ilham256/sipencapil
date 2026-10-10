@@ -95,7 +95,7 @@
 									<div class="col-md-6 col-xs-12">
 										<?php echo $data_mk["0"]->dosen; ?><br><br>
 									</div>
-								</div>
+								</div> 
 								<div class="row">
 									<div class="col-md-3 col-xs-12">
 										Angkatan

@@ -21,7 +21,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-danger">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><b>SiPenCapil - </b>App</a>
+      <b>SiPenCapil - </b>App
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
@@ -62,12 +62,22 @@
           </div>
           <!-- /.col -->
         </div>
+       
       </form>
-
 
       <!-- /.social-auth-links -->
 
     </div>
+      <div class="row">
+          <div class="col-8">
+
+          </div>
+          <!-- /.col -->
+          <div class="col-5">
+            <p class="login-box-msg">Version 1.2</p>
+          </div>
+          <!-- /.col -->
+        </div>
     <!-- /.card-body -->
   </div>
   <!-- /.card -->

@@ -22,7 +22,7 @@
 									<select id="nim_3" class="form-control select2 select2-danger" name="mk" required>
 										<option value="" style="background: lightblue;" selected disabled>- Mata Kuliah -</option>
 										<?php $i = 1; foreach($mata_kuliah as $d) { ?>
-										<option value="<?php echo $d->kode_mk; ?>"><?php echo $d->nama_kode_2." (".$d->nama_mata_kuliah.")"; ?></option>
+										<option value="<?php echo $d->kode_mk; ?>"><?php echo $d->kode_mk." (".$d->nama_mata_kuliah.") - ".$d->kode_kurikulum; ?></option>
 										<?php $i++; } ?>
 									</select>
 								</div>
@@ -79,19 +79,19 @@
 					</div>
 					<div class="row">
 						<div class="col-md-3 col-xs-12">
-							Kode TM-2018 & 2019
+							Kode
 						</div>
 						<div class="col-md-6 col-xs-12">
-							<?php echo $data_mk["0"]->nama_kode; ?>
+							<?php echo $data_mk["0"]->kode_mk; ?>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-3 col-xs-12">
-							Kode K-2020
+							Kurikulum
 						</div> 
 						<div class="col-md-6 col-xs-12">
-							<?php echo $data_mk["0"]->nama_kode_2; ?>
-						</div>
+							<?php echo $data_mk["0"]->kode_kurikulum; ?>
+						</div> 
 					</div>
 					<div class="row">
 						<div class="col-md-3 col-xs-12">
