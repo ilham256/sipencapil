@@ -55,7 +55,7 @@ class CpmkCplModel extends Model
         return $this->db->table('cpl_langsung')
                         ->where('id_cpl_langsung', $id)
                         ->get()
-                        ->getResult();
+                        ->getResult();    
     }
 
     public function submitTambahCpl($data)

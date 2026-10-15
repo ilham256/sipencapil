@@ -12,17 +12,21 @@
               <form role="form" method="post" action="<?php echo site_url('cpmkcpl/submiteditcpl') ?>" enctype="multipart/form-data">
 	                <div class="card-body">
 
+	                		<div class="form-group">
+			                    <label for="exampleInputEmail1">Kode CPL</label>
+			                    <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->id_cpl_langsung ?>" name="kode" disabled>
+			                  </div>
+
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Nama CPL</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data->nama ?>" name="nama_cpl">
+			                    <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->nama ?>" name="nama_cpl" >
 			                  </div>
-			                  <br>
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Deskripsi</label>
 			                    
-			                    <textarea class="form-control" rows="3" id="text" name="deskripsi"><?= $data->deskripsi ?></textarea>
+			                    <textarea class="form-control" rows="3" id="text" name="deskripsi"><?= $data[0]->deskripsi ?></textarea>
 			                  </div>
-			                  <input type="hidden" name="id" value="<?= $data->id_cpl_langsung ?>" >
+			                  <input type="hidden" name="id" value="<?= $data[0]->id_cpl_langsung ?>" >
 			                  <br>
 
 
@@ -33,7 +37,7 @@
               </form>
 
 	              <div class="card-footer">	                
-	              	<a onclick="return confirm('apakah anda ingin menghapus data')" href="<?php echo site_url('formula/hapus_cpl/'.$data->id_cpl_langsung); ?>"><button type="submit" class="btn btn-danger" name="simpan" value="simpan">Hapus CPL</button></a>
+	              	<a onclick="return confirm('apakah anda ingin menghapus data')" href="<?php echo site_url('formula/hapus_cpl/'.$data[0]->id_cpl_langsung); ?>"><button type="submit" class="btn btn-danger" name="simpan" value="simpan">Hapus CPL</button></a>
 	               </div>
 
 

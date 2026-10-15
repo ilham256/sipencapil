@@ -25,6 +25,28 @@ class PerbaikanModel extends Model
             ->getResult();
     }
 
+    public function getPerbaikanMataKuliahSelectDosen($id)  
+    {
+        return $this->db->table($this->table)
+            ->select('perbaikan_mata_kuliah.*, dosen.*, mata_kuliah.*')
+            ->join('dosen', 'dosen.NIP = perbaikan_mata_kuliah.NIP')
+            ->join('mata_kuliah', 'mata_kuliah.kode_mk = perbaikan_mata_kuliah.kode_mk')
+            ->where('dosen.NIP', $id)
+            ->get()
+            ->getResult();
+    }
+
+    public function getPerbaikanMataKuliahSelect()  
+    {
+        return $this->db->table($this->table)
+            ->select('perbaikan_mata_kuliah.*, dosen.*, mata_kuliah.*')
+            ->join('dosen', 'dosen.NIP = perbaikan_mata_kuliah.NIP')
+            ->join('mata_kuliah', 'mata_kuliah.kode_mk = perbaikan_mata_kuliah.kode_mk')
+            ->get()
+            ->getResult();
+    }
+
+
     public function submitTambah($saveData)  
     {
         return $this->db->table($this->table)

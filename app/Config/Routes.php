@@ -74,13 +74,13 @@ $routes->get('cpmkcpl', 'CpmkCpl::index');
 $routes->get('cpmkcpl/tambahcpl', 'CpmkCpl::tambahCpl');
 $routes->post('cpmkcpl/submittambahcpl', 'CpmkCpl::submitTambahCpl');
 $routes->get('cpmkcpl/editcpl/(:any)', 'CpmkCpl::editCpl/$1');
-$routes->post('cpmkcpl/editcpl', 'CpmkCpl::submitEditCpl');
+$routes->post('cpmkcpl/submiteditcpl', 'CpmkCpl::submitEditCpl');
 $routes->get('cpmkcpl/hapuscpl/(:any)', 'CpmkCpl::hapusCpl/$1');
 
 $routes->get('cpmkcpl/tambahcpmk', 'CpmkCpl::tambahCpmk');
-$routes->post('cpmkcpl/tambahcpmk', 'CpmkCpl::submitTambahCpmk');
+$routes->post('cpmkcpl/submittambahcpmk', 'CpmkCpl::submitTambahCpmk');
 $routes->get('cpmkcpl/editcpmk/(:any)', 'CpmkCpl::editCpmk/$1');
-$routes->post('cpmkcpl/editcpmk', 'CpmkCpl::submitEditCpmk');
+$routes->post('cpmkcpl/submiteditcpmk', 'CpmkCpl::submitEditCpmk');
 $routes->get('cpmkcpl/hapuscpmk/(:any)', 'CpmkCpl::hapusCpmk/$1');
 
 $routes->get('cpmkcpl/tambahdeskriptor/(:any)', 'CpmkCpl::tambahDeskriptor/$1');
@@ -98,13 +98,18 @@ $routes->post('cpmktlang/import', 'Cpmktlang::import');
 
 $routes->get('data', 'Data::index');
 $routes->get('data/export_excel', 'Data::export_excel');
+$routes->get('data/data_kekurangan_nilai', 'Data::data_kekurangan_nilai');
 $routes->get('data/data_cpmk', 'Data::data_cpmk');
 $routes->get('data/data_persentase_nilai_masuk', 'Data::data_persentase_nilai_masuk');
 
 $routes->post('data/export_excel', 'Data::export_excel');
 $routes->post('data', 'Data::index');
+$routes->post('data/data_kekurangan_nilai', 'Data::data_kekurangan_nilai');
 $routes->post('data/data_cpmk', 'Data::data_cpmk');
 $routes->post('data/data_persentase_nilai_masuk', 'Data::data_persentase_nilai_masuk');
+
+$routes->get('datadosen/data_kekurangan_nilai', 'DataDosen::data_kekurangan_nilai');
+$routes->post('datadosen/data_kekurangan_nilai', 'DataDosen::data_kekurangan_nilai');
 
 $routes->get('dosen', 'Dosen::index');
 $routes->get('dosen/tambah', 'Dosen::tambah');
@@ -284,6 +289,17 @@ $routes->group('perbaikanmatakuliah', ['namespace' => 'App\Controllers'], functi
     $routes->get('export_excel', 'PerbaikanMatakuliah::export_excel');
 });
 
+$routes->group('perbaikanmatakuliahdosen', ['namespace' => 'App\Controllers'], function($routes) {
+    $routes->get('/', 'PerbaikanMatakuliahDosen::index');
+    $routes->get('tambah', 'PerbaikanMatakuliahDosen::tambah');
+    $routes->post('submit_tambah', 'PerbaikanMatakuliahDosen::submit_tambah');
+    $routes->post('submit_edit', 'PerbaikanMatakuliahDosen::submit_edit');
+    $routes->get('edit/(:any)', 'PerbaikanMatakuliahDosen::edit/$1');
+    $routes->get('download/(:any)', 'PerbaikanMatakuliahDosen::download/$1');
+    $routes->get('hapus/(:any)', 'PerbaikanMatakuliahDosen::hapus/$1');
+    $routes->get('export_excel', 'PerbaikanMatakuliahDosen::export_excel');
+});
+
 $routes->group('profilmatakuliah', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('/', 'ProfilMatakuliah::index');
     $routes->post('/', 'ProfilMatakuliah::index');
@@ -322,6 +338,7 @@ $routes->post('/reportdosen/kinerja_cpmk_mahasiswa', 'ReportDosen::kinerja_cpmk_
 $routes->post('/reportdosen/download_report_mahasiswa', 'ReportDosen::download_report_mahasiswa');
 $routes->get('/reportdosen/mata_kuliah', 'ReportDosen::mata_kuliah');
 $routes->post('/reportdosen/mata_kuliah', 'ReportDosen::mata_kuliah');
+$routes->post('/reportdosen/periksa_kekurangan_cpmk_mahasiswa', 'ReportDosen::periksa_kekurangan_cpmk_mahasiswa');
 
 $routes->post('/reportdosen/download_report_mata_kuliah', 'ReportDosen::download_report_mata_kuliah');
 $routes->get('/reportdosen/relevansi_ppm', 'ReportDosen::relevansi_ppm');

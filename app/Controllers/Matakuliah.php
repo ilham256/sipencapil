@@ -39,7 +39,7 @@ class Matakuliah extends BaseController
 
         $data['datas'] = $this->matakuliahModel->getMatakuliah();
         $data['datas'] = $this->matakuliahModel->getMatakuliahKurikulum($data['kurikulum_terpilih']);
-
+        //dd($data);
         echo view('vw_template', $data);
     }
 
@@ -56,7 +56,7 @@ class Matakuliah extends BaseController
                 'nama_mata_kuliah' => $this->request->getPost('nama_mata_kuliah', FILTER_SANITIZE_STRING),
                 'sks' => $this->request->getPost('sks', FILTER_SANITIZE_STRING),
                 'kode_kurikulum' => $this->request->getPost('kode_kurikulum', FILTER_SANITIZE_STRING),
-                'id_semester' => 1,
+                'id_semester' => $this->request->getPost('semester', FILTER_SANITIZE_STRING),
             ];
 
 
@@ -94,6 +94,7 @@ class Matakuliah extends BaseController
             $save_data = [
                 'nama_mata_kuliah' => $this->request->getPost('nama_mata_kuliah', FILTER_SANITIZE_STRING),
                 'sks' => $this->request->getPost('sks', FILTER_SANITIZE_STRING),
+                'id_semester' => $this->request->getPost('semester', FILTER_SANITIZE_STRING),
             ];
             $id_edit = $this->request->getPost('kode_mata_kuliah', FILTER_SANITIZE_STRING);
 

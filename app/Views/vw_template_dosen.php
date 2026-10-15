@@ -52,8 +52,11 @@
     <!-- Brand Logo -->
     <a href="<?php echo site_url() ?>"  class="brand-link">
       <img src="<?= base_url('Adminlte/dist/img/IPB.jfif') ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Teknik Sipil dan
-      <br> Lingkungan IPB</span>
+      <span class="brand-text font-weight-light">
+      Teknik Sipil dan
+      <br> &ensp;&ensp;&ensp;&ensp;&ensp;
+      Lingkungan IPB
+      </span>
     </a>
 
     <!-- Sidebar -->
@@ -64,7 +67,7 @@
           <img src="<?= base_url('Adminlte/dist/img/SIL.jpg') ?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="<?= base_url('akun') ?>" class="d-block">Lecturer</a>
+          <a href="<?= base_url('akun') ?>" class="d-block"><?= session()->get('nama_dosen'); ?></a>
         </div>
       </div>
 
@@ -103,15 +106,6 @@
             </ul>
           </li>
 
-          <li class="nav-item has-treeview">
-            <a href="<?= base_url('evaluasildosen') ?>" class="nav-link <?php if ($breadcrumbs == 'evaluasi_l') {echo "active";}?>">
-            <i class="nav-icon fas fa-chart-bar"></i>
-            <p>
-              Analisis & Evaluasi
-            </p>
-            </a>
-          </li>
-
           <li class="nav-item <?php if (in_array($breadcrumbs, ['report', 'report_epbm','report_kinerja_cpmk_mahasiswa','report_mahasiswa','report_mata_kuliah','report_relevansi_ppm','report_efektivitas_cpl'])) {echo "menu-open";}?>">
             <a href="report" class="nav-link <?php if (in_array($breadcrumbs, ['report', 'report_epbm','report_kinerja_cpmk_mahasiswa','report_mahasiswa','report_mata_kuliah','report_relevansi_ppm','report_efektivitas_cpl'])) {echo "active";}?>">
             <i class="nav-icon fas fa-file-alt"></i>
@@ -146,6 +140,37 @@
                 </a>
               </li>
             </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="<?= base_url('datadosen/data_kekurangan_nilai') ?>" class="nav-link <?php if ($breadcrumbs == 'data_kekurangan_nilai') {echo "active";}?>">
+            <i class="nav-icon fas fa-chart-bar"></i>
+            <p>
+              Data Kekurangan Nilai
+            </p>
+            </a>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="<?= base_url('evaluasildosen') ?>" class="nav-link <?php if ($breadcrumbs == 'evaluasi_l') {echo "active";}?>">
+            <i class="nav-icon fas fa-chart-bar"></i>
+            <p>
+              Analisis & Evaluasi
+            </p>
+            </a>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="<?= base_url('perbaikanmatakuliahdosen') ?>" class="nav-link <?php if (in_array($breadcrumbs, ['perbaikan'])) {echo "active";}?>">
+            <i class="nav-icon fas fa-marker"></i>
+            <p>
+              Asesmen dan Tindak
+            </p><br>
+            &ensp;&ensp;&ensp;&ensp;
+            <p>Lanjut Perbaikan</p><br>
+            &ensp;&ensp;&ensp;&ensp;
+            <p>Matakuliah</p>
+            </a>
           </li>
 
           <li class="nav-item has-treeview">

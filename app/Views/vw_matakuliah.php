@@ -56,7 +56,7 @@
                     <!-- /.card-footer -->
                     </div>
                     <!-- /.card -->
-                    </div>
+                    </div> 
                     <!-- ./col -->
                 </div>
             </div>
@@ -111,8 +111,17 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Nama Mata Kuliah</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $r->nama_mata_kuliah	;?>" name="nama_mata_kuliah" maxlength="30" required>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $r->nama_mata_kuliah	;?>" name="nama_mata_kuliah" maxlength="64" required>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Semester</label>
+                                            <select id="semester" class="form-control select2 select2-danger" name="semester" required>
+                                                    <option value="<?php echo $r->id_semester; ?>" style="background: lightblue;" selected ><?php echo $r->id_semester; ?></option>
+                                                    <?php $i = 1; foreach($data_semester as $d) { ?>
+                                                    <option value="<?php echo $d->id_semester; ?>"><?php echo $d->id_semester; ?></option>
+                                                    <?php $i++; } ?>
+                                            </select>
+                                        </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Jumlah SKS</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $r->sks	;?>" name="sks" maxlength="10" required>
@@ -193,8 +202,16 @@
 			</div>
             <div class="form-group">
 				<label for="exampleInputEmail1">Nama Mata Kuliah</label>
-				<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nama" name="nama_mata_kuliah" maxlength="30" required>
+				<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nama" name="nama_mata_kuliah" maxlength="64" required>
 			</div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Semester</label>
+                <select id="semester" class="form-control select2 select2-danger" name="semester" required>
+                        <option value="" style="background: lightblue;" selected disabled>- Semester -</option>
+                        <?php $i = 1; foreach($data_semester as $d) { ?>
+                        <option value="<?php echo $d->id_semester; ?>"><?php echo $d->id_semester; ?></option>
+                        <?php $i++; } ?>                </select>
+            </div>
             <div class="form-group">
 				<label for="exampleInputEmail1">Jumlah SKS</label>
 				<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Jumlah SKS" name="sks" maxlength="10" required>

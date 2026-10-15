@@ -13,16 +13,18 @@
 	                <div class="card-body"> 
 	                  <div class="form-group">
 	                    <label for="exampleInputEmail1">Mata Kuliah</label>
-	                    <select id="mata_kuliah" class="form-select" name="mata_kuliah">
+	                    <select id="mata_kuliah" class="form-control select2 select2-danger" name="mata_kuliah" required>
+                        <option value="" style="background: lightblue;" selected disabled>- Mata Kuliah -</option>
                         <?php $i = 1; foreach($mata_kuliah as $d) { ?>
-                        <option value="<?php echo $d->kode_mk; ?>"><?php echo $d->nama_kode.' ('.$d->nama_mata_kuliah.')'; ?></option>
+                        <option value="<?php echo $d->kode_mk; ?>"><?php echo $d->nama_kode.' ('.$d->nama_mata_kuliah.') - '.$d->kode_kurikulum; ?></option>
                         <?php $i++; } ?>
-                      </select>
+                      </select> 
 	                  </div>
                     <br>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nama Dosen</label>
-                      <select id="mata_kuliah" class="form-select" name="dosen">
+                      <select id="dosen" class="form-control select2 select2-danger" name="dosen" required>
+                        <option value="" style="background: lightblue;" selected disabled>- Dosen -</option>
                         <?php $i = 1; foreach($dosen as $d) { ?>
                         <option value="<?php echo $d["NIP"]; ?>"><?php echo $d["NIP"].' ('.$d["nama_dosen"].')'; ?></option>
                         <?php $i++; } ?>
@@ -31,17 +33,17 @@
                     <br>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Tahun</label>
-                      <input type="number" class="form-control" id="exampleInputEmail1" name="tahun">
+                      <input type="number" class="form-control" id="exampleInputEmail1" name="tahun" required>
                     </div>
                     <br>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Hasil Analisis dan Evaluasi</label><br>
-                      <textarea class="form-control" rows="5" placeholder="Enter ..." name="analisis"></textarea>
+                      <textarea class="form-control" rows="5" placeholder="Enter ..." name="analisis" required></textarea>
                     </div>
                     <br>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Tindak Lanjut dan Bukti Perbaikan</label>
-                      <textarea class="form-control" rows="5" placeholder="Enter ..." name="perbaikan"></textarea>
+                      <textarea class="form-control" rows="5" placeholder="Enter ..." name="perbaikan" required></textarea>
                     </div>
 
                 </div>

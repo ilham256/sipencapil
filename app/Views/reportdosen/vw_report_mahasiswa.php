@@ -58,8 +58,8 @@
 
 							<div class="text-center" style="color: #216a8d; font-size: 24px;">
 								<p><strong>INSTITUT PERTANIAN BOGOR<br>
-								DEPARTEMEN TEKNIK SIPIL DAN LINGKUNGAN<br>
-								P.S. TEKNIK SIPIL DAN LINGKUNGAN
+								FAKULTAS TEKNIK DAN TEKNOLOGI<br>
+								PROGRAM SARJANA TEKNIK SIPIL DAN LINGKUNGAN
 								<br><hr>
 								</strong>
 								</p>
@@ -69,16 +69,10 @@
 							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: #216a8d;'>
 								Nama Lengkap
 							</div>
-							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: #216a8d;'>
-								Tempat, Tanggal Lahir
-							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: grey;'>
 								<?php echo $nama_rapor_mahasiswa; ?>
-							</div>
-							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: grey;'>
-								-
 							</div>
 						</div>
 						<br>
@@ -86,17 +80,11 @@
 							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: #216a8d;'>
 								Nomor Induk Mahasiswa
 							</div>
-							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: #216a8d;'>
-								Tahun Masuk
-							</div>
 							
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: grey;'>
 								<?php echo $nim_rapor_mahasiswa; ?>
-							</div>
-							<div class="col-md-6 col-xs-12" style='font-weight: bold; color: grey;'>
-								-
 							</div>
 						</div> 
 						<br>
@@ -123,7 +111,7 @@
 						</table>
 						<div class="float-end margin-top-50">
 
-							<form role="form" id="contactform" action="<?php echo site_url('report/periksa_kekurangan_cpmk_mahasiswa')?>" method="post">
+							<form role="form" id="contactform" action="<?php echo site_url('reportdosen/periksa_kekurangan_cpmk_mahasiswa')?>" method="post">
 
 								<input type="hidden" name="nim" value="<?php echo $nim_rapor_mahasiswa; ?>">
 

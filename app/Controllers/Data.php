@@ -125,6 +125,40 @@ class Data extends BaseController
         return view('vw_template', $arr);
     }
 
+
+    public function data_kekurangan_nilai()
+    {
+        $arr['breadcrumbs'] = 'data_kekurangan_nilai';
+        $arr['content'] = 'vw_data_kekurangan_nilai';
+
+        $arr['tahun_masuk'] = $this->mahasiswaModel->getTahunMasuk();
+
+        $simpan_tahun = $this->mahasiswaModel->getTahunMasukMin();
+        $tahun = 2017;
+
+        $arr['simpanan_tahun'] = $tahun;
+        $arr['t_simpanan_tahun'] = ($simpan_tahun[0]->tahun_masuk) + 1;
+
+        //$nilai_cpmk = $this->kinumumModel->getNilaiCpmkSelect();
+
+        if ($this->request->getPost('pilih')) {
+            $tahun = $this->request->getPost('tahun');
+            $arr['simpanan_tahun'] = $tahun;
+            $arr['t_simpanan_tahun'] = ((int)$tahun) + 1;
+        }
+
+        $target = $this->katkinModel->getKatkin();
+        $arr['target'] = $target[0]->nilai_target_pencapaian_cpmk;
+
+        $arr['nilai_cpmk_kurang'] = $this->kinumumModel->getNilaiCpmkKurang($tahun,$arr['target']);
+        //dd($arr['nilai_cpmk_kurang']);
+
+        //dd($arr, $rumus_cpl, $rumus_deskriptor);
+
+        return view('vw_template', $arr);
+    }
+
+
     public function export_excel()
     {
         $arr['tahun_masuk'] = $this->mahasiswaModel->getTahunMasuk();

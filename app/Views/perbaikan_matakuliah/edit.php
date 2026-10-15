@@ -9,42 +9,42 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" method="post" action="<?php echo site_url('perbaikan_matakuliah/submit_edit') ?>" enctype="multipart/form-data">
+              <form role="form" method="post" action="<?php echo site_url('perbaikanmatakuliah/submit_edit') ?>" enctype="multipart/form-data">
 	                <div class="card-body">
 	                			
   			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">NIP</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" disabled value="<?= $data->NIP; ?>" >
+			                    <input type="text" class="form-control" id="exampleInputEmail1" disabled value="<?= $data[0]->NIP; ?>" >
 			                  </div>
 			                  <br>
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Nama Dosen</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" disabled value="<?= $data->nama_dosen; ?>">
+			                    <input type="text" class="form-control" id="exampleInputEmail1" disabled value="<?= $data[0]->nama_dosen; ?>">
 			                  </div>
 			                  <br>
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Matakuliah</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" disabled value="<?= $data->nama_mata_kuliah; ?>">
+			                    <input type="text" class="form-control" id="exampleInputEmail1" disabled value="<?= $data[0]->nama_mata_kuliah; ?>">
 			                  </div>
 			                  <br>
 					            <div class="form-group">
 					              <label for="exampleInputEmail1">Tahun</label>
-					              <input type="number" class="form-control" id="exampleInputEmail1" disabled value="<?= $data->tahun; ?>">
+					              <input type="number" class="form-control" id="exampleInputEmail1" disabled value="<?= $data[0]->tahun; ?>">
 					            </div>
 					            <br>
 
 					            <div class="form-group">
 					              <label for="exampleInputEmail1">Hasil Analisis dan Evaluasi</label><br>
-					              <textarea class="form-control" rows="5" name="analisis"><?= $data->analisis; ?></textarea>
+					              <textarea class="form-control" rows="5" name="analisis"><?= $data[0]->analisis; ?></textarea>
 					            </div>
 					            <br>
 
 					            <div class="form-group">
 					              <label for="exampleInputEmail1">Tindak Lanjut dan Bukti Perbaikan</label>
-					              <textarea class="form-control" rows="5" name="perbaikan"><?= $data->perbaikan; ?></textarea>
+					              <textarea class="form-control" rows="5" name="perbaikan"><?= $data[0]->perbaikan; ?></textarea>
                     			</div>
 
-                    			<input type="hidden" name="id" value="<?= $data->id; ?>">
+                    			<input type="hidden" name="id" value="<?= $data[0]->id; ?>">
 
                   </div>
                 <div class="card-footer">
@@ -52,11 +52,6 @@
                 </div>
 
               </form>
-              	<div class="card-body">
-              	<a onclick="return confirm('Apakah Anda Ingin Mencetak Data?')" href="<?php echo site_url('perbaikanmatakuliah/download/'.$data->id); ?>" target="_blank">
-              		<button class="btn btn-default waves-effect waves-light"><i class='fa fa-download'></i> Download</button>
-              	</a>
-              	</div>
 
             </div>
 

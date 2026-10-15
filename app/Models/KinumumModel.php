@@ -129,6 +129,21 @@ class KinumumModel extends Model
             ->getResult();
     }
 
+    public function getNilaiCpmkKurang($tahun,$target)  
+    {
+        return $this->db->table($this->tableNilaiCpmk)
+            ->select('*')
+            ->join('mahasiswa', 'mahasiswa.nim = nilai_cpmk.nim')
+            ->join('matakuliah_has_cpmk', 'matakuliah_has_cpmk.id_matakuliah_has_cpmk = nilai_cpmk.id_matakuliah_has_cpmk')
+            ->join('mata_kuliah', 'mata_kuliah.kode_mk = matakuliah_has_cpmk.kode_mk')
+            ->where('mahasiswa.tahun_masuk', $tahun)
+            ->where('nilai_cpmk.nilai_langsung <', $target)
+            ->orderBy('mahasiswa.nim','ASC')
+            ->orderBy('mata_kuliah.kode_mk','ASC')
+            ->get()
+            ->getResult();
+    } 
+
     public function getNilaiCpmkAngkatan($tahun)  
     {
         return $this->db->table($this->tableNilaiCpmk)

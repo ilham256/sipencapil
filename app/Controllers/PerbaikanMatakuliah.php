@@ -60,7 +60,7 @@ class PerbaikanMatakuliah extends BaseController {
 
     public function tambah()
     {
-        $data['breadcrumbs'] = 'dosen';
+        $data['breadcrumbs'] = 'perbaikan';
         $data['content'] = 'perbaikan_matakuliah/tambah';
         $data['dosen'] = $this->dosenModel->getDosen();
         $data['mata_kuliah'] = $this->matakuliahModel->getMatakuliah();
@@ -107,10 +107,10 @@ class PerbaikanMatakuliah extends BaseController {
         $edit = $this->perbaikanModel->editPerbaikanMataKuliah($id);
         $data = [
             'data' => $edit,
-            'breadcrumbs' => 'perbaikan_matakuliah',
+            'breadcrumbs' => 'perbaikan',
             'content' => 'perbaikan_matakuliah/edit'
         ];
-
+        //dd($data);
         return view('vw_template', $data);
     }
 
@@ -122,7 +122,7 @@ class PerbaikanMatakuliah extends BaseController {
 		foreach ($edit as $row) {
 			$arr['data'] = $row;
 		}
-		$arr['breadcrumbs'] = 'perbaikan_matakuliah';
+		$arr['breadcrumbs'] = 'perbaikan';
 		$arr['content'] = 'perbaikan_matakuliah/vw_perbaikan_matakuliah_print';
 
 		$arr['mata_kuliah'] = $this->matakuliahModel->getMatakuliah();

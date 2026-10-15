@@ -89,6 +89,7 @@ class CpmkCpl extends BaseController
         $data['data'] = $edit;
         $data['breadcrumbs'] = 'cpmk_cpl';
         $data['content'] = 'cpl/edit';
+        //dd($data); 
         return view('vw_template', $data);
     }
 

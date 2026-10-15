@@ -240,6 +240,7 @@ class Report extends BaseController
         
         
         $nilai_cpmk = $this->kinumumModel->getNilaiCpmk();
+        //dd($nilai_cpmk);
 
         $pilih_2 = $this->request->getPost('pilih_2');
 
@@ -304,16 +305,16 @@ class Report extends BaseController
                 }
                 array_push($data['nilai_cpl_mahasiswa'], $n);
             }
-
+           // dd($data['nilai_cpl_mahasiswa']);
             foreach ($data['nilai_cpl_mahasiswa'] as $nilai_cpl) {
                 if ($nilai_cpl > $batas_sangat_baik) {
-                    $status_cpl_mahasiswa = 'Sangat Baik';
+                    $status_cpl_mahasiswa = 'Memenuhi';
                 } elseif ($nilai_cpl > $batas_baik) {
-                    $status_cpl_mahasiswa = 'Baik';
+                    $status_cpl_mahasiswa = 'Memenuhi';
                 } elseif ($nilai_cpl > $batas_cukup) {
-                    $status_cpl_mahasiswa = 'Cukup';
+                    $status_cpl_mahasiswa = 'Tidak Memenuhi';
                 } else {
-                    $status_cpl_mahasiswa = 'Kurang';
+                    $status_cpl_mahasiswa = 'Tidak Memenuhi';
                 }
                 array_push($data['status_nilai_cpl_mahasiswa'], $status_cpl_mahasiswa);
             }

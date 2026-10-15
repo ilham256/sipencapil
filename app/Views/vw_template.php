@@ -44,7 +44,18 @@
     <img class="animation__shake" src="<?= base_url('Adminlte/dist/img/IPB.jfif') ?>" alt="AdminLTELogo" height="100" width="100">
   </div>
 
-  <!-- Navbar -->
+    <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="<?php echo site_url() ?>" class="nav-link">Home</a>
+      </li>
+    </ul>
+  </nav>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
@@ -278,7 +289,7 @@
             </a>
           </li>
 
-          <li class="nav-item <?php if (in_array($breadcrumbs, ['data', 'data_cpmk', 'data_persentase_nilai_masuk'])) {echo "menu-open";}?>">
+          <li class="nav-item <?php if (in_array($breadcrumbs, ['data_kekurangan_nilai','data', 'data_cpmk', 'data_persentase_nilai_masuk'])) {echo "menu-open";}?>">
             <a href="#" class="nav-link <?php if (in_array($breadcrumbs, ['data', 'data_cpmk', 'data_persentase_nilai_masuk'])) {echo "active";}?>">
             <i class="nav-icon fas fa-book"></i>
             <p>
@@ -287,6 +298,12 @@
             </p>
             </a>
             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('data/data_kekurangan_nilai') ?>" class="nav-link <?php if ($breadcrumbs == 'data_kekurangan_nilai') {echo "active";}?>"> 
+                <i class="far fa-circle nav-icon"></i> 
+                <p>Data Kekurangan Nilai</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="<?= base_url('data') ?>" class="nav-link <?php if ($breadcrumbs == 'data') {echo "active";}?>"> 
                 <i class="far fa-circle nav-icon"></i> 
@@ -330,8 +347,6 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-    </div>
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -340,7 +355,7 @@
         <!-- Small boxes (Stat box) -->
         <!-- /.row -->
         <!-- Main row -->
-        <div class="row">
+
           <!-- Left col -->
             <!-- Custom tabs (Charts with tabs)-->
             <?= view($content); ?>

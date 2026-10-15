@@ -173,9 +173,6 @@
 				pointBorderColor: "#fff",
 				borderWidth: 1,
 				data: [arr_nilai[i][j]],
-				errorBars: {
-					'Nilai': {plus: 15, minus: 10},
-						}
 					},
 				)
 		}
@@ -199,14 +196,26 @@
 						display: false,
 						text: 'Chart.js Error Bars Plugin'
 					},
-					plugins: {
-						chartJsPluginErrorBars: {
-							color: 'darkgrey',
-							width: 10 | '10px' | '60%',
-							lineWidth: 2 | '2px',
-							absoluteValues: false
-						}
-					},
+					animation: {
+				        duration: 1,
+				        onComplete: function () {
+				            var chartInstance = this.chart,
+				                ctx = chartInstance.ctx;
+
+				            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+				            ctx.textAlign = 'center';
+				            ctx.textBaseline = 'bottom';
+
+				            this.data.datasets.forEach(function (dataset, i) {
+				                var meta = chartInstance.controller.getDatasetMeta(i);
+				                meta.data.forEach(function (bar, index) {
+				                    var data = dataset.data[index];
+				                    // Atur posisi y - 5 agar teks berada sedikit di atas batang
+				                    ctx.fillText(data, bar._model.x, bar._model.y - 5);
+				                });
+				            });
+				        }
+				    },
 					scales: {
 						xAxes: [{
 								display: false,
@@ -221,7 +230,7 @@
 									beginAtZero: true,
 									steps: 10,
 									stepValue: 5,
-									max: 100
+									max: 120
 								},
 								scaleLabel: {
 									display: true,
@@ -233,16 +242,13 @@
 						callbacks: {
 							label: function(tooltipItem, data) {
 								var label = data.datasets[tooltipItem.datasetIndex].label || '';
-								var errorBars = data.datasets[tooltipItem.datasetIndex].errorBars;
+
 								if (label) {
 									label += ': ';
 								}
 
 								var value = Math.round(tooltipItem.yLabel * 100) / 100;
 								label += value;
-								var stdMin = value - errorBars[title].minus;
-								var stdMax = value + errorBars[title].plus;								
-								label += ' (' + stdMin + '..' + stdMax + ')'
 								return label;
 							}
 						}

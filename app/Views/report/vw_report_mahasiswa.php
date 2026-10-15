@@ -51,17 +51,17 @@
 			</div>
 
 			<?php if ($status == 'tampilkan') { ?>
-			
 			<div class="card card-dark" id="printCard">
 				<div class="card-header" style="background-color: #216a8d; color: #FFFFFF;">
+
 				</div>
 				<div class="card-body">	
 					
 
 							<div class="text-center" style="color: #216a8d; font-size: 24px;">
 								<p><strong>INSTITUT PERTANIAN BOGOR<br>
-								DEPARTEMEN TEKNIK SIPIL DAN LINGKUNGAN<br>
-								P.S. TEKNIK SIPIL DAN LINGKUNGAN
+								FAKULTAS TEKNIK DAN TEKNOLOGI<br>
+								PROGRAM SARJANA TEKNIK SIPIL DAN LINGKUNGAN
 								<br><hr>
 								</strong>
 								</p>
@@ -115,19 +115,26 @@
 								<?php } ?>
 							</tbody>  
 						</table>
+						<table class="table">
+							<tbody>
+    						<tr>
+							<!-- Kolom kosong di kiri (bisa diisi ttd lain jika butuh, misal lebar 70%) -->
+						    <td style="width: 70%;"></td>
+    
+						    <!-- Kolom tanda tangan di kanan (lebar 30%, teks rata tengah) -->
+						    <td style="width: 30%; text-align: center;">
+						    		<br>
+ 						       <p>Ketua Program Studi</p>
+							        <br><br><br> <!-- Ruang untuk tanda tangan asli/stempel -->
+ 						       <p>
+            						<strong>Tri Sudibyo S.T., M.Sc., Ph.D.</strong><br>
+            						NIP. 198405302014041001
+        						</p>
+    						</td>
+							</tr>
+							</tbody>
+						</table>
 						<div class="float-end margin-top-50">
-
-							<form role="form" id="contactform" action="<?php echo site_url('report/periksa_kekurangan_cpmk_mahasiswa')?>" method="post">
-
-								<input type="hidden" name="nim" value="<?php echo $nim_rapor_mahasiswa; ?>">
-
-								<button type="submit" class="btn btn-default waves-effect waves-light" name="pilih" value="pilih"><i class="nav-icon fas fa-search"></i>&nbsp; Periksa Kekurangan Nilai</button>
-								<button class="btn btn-primary" onclick="printDiv()"><i class="nav-icon fas fa-print"></i>&nbsp; Cetak Laporan Mahasiswa</button>
-								
-
-							</form>
-
-							
 						</div>
 					
 					<!-- /.invoice-box -->
@@ -135,6 +142,18 @@
 				</div>
 				<!-- /.col-xs-12 -->
 			</div>
+
+			<div class="float-end margin-top-50">
+				<form role="form" id="contactform" action="<?php echo site_url('report/periksa_kekurangan_cpmk_mahasiswa')?>" method="post">
+					<input type="hidden" name="nim" value="<?php echo $nim_rapor_mahasiswa; ?>">
+					<button type="submit" class="btn btn-default waves-effect waves-light" name="pilih" value="pilih"><i class="nav-icon fas fa-search"></i>&nbsp; Periksa Kekurangan Nilai
+					</button>
+					<button class="btn btn-primary" onclick="printDiv()"><i class="nav-icon fas fa-print"></i>&nbsp; Cetak Laporan Mahasiswa
+					</button>
+				</form>			
+			</div>
+
+
 			<?php } ?>					
 
 		</div>
@@ -148,14 +167,30 @@
 <script src="<?php echo base_url() ?>plugin/chart/node_modules/chartjs-plugin-error-bars/build/Plugin.Errorbars.js"></script>
 
  <script>
+
     function printDiv() {
+        // 1. Simpan title asli dokumen
+        var originalTitle = document.title;
+        
+        // 2. Ubah title dokumen menggunakan variabel PHP (Ini akan menjadi nama file PDF)
+        // Saya asumsikan format filenya menjadi: Raport_NIM_NamaMahasiswa
+        document.title = "Raport_<?php echo $nim_rapor_mahasiswa; ?>_<?php echo $nama_rapor_mahasiswa; ?>";
+
+        // 3. Proses isolate div seperti script Anda
         var printContents = document.getElementById('printCard').innerHTML;
         var originalContents = document.body.innerHTML;
 
         document.body.innerHTML = printContents;
+        
+        // 4. Panggil print
         window.print();
+        
+        // 5. Kembalikan konten dan title seperti semula
         document.body.innerHTML = originalContents;
-        window.location.reload(); // Reload halaman untuk memastikan tampilan kembali normal
+        document.title = originalTitle;
+        
+        // 6. Reload halaman (Sangat disarankan di AdminLTE agar sidebar dan JS bawaan tidak error setelah body di-replace)
+        window.location.reload(); 
     }
 </script>
 

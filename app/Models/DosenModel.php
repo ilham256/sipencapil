@@ -29,6 +29,11 @@ class DosenModel extends Model
         return $this->replace($saveData);
     }
 
+    public function selectDosen($id)
+    {
+        return $this->where('NIP', $id)->first();
+    }
+
     public function editDosen($id)
     {
         return $this->where('nim', $id)->findAll();
