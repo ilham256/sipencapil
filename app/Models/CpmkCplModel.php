@@ -13,6 +13,9 @@ class CpmkCplModel extends Model
     public function getCpmk()
     {
         return $this->db->table('cpmk_langsung')
+                        ->orderBy("id_cpmk_langsung REGEXP '_[0-9]+$'", 'DESC', false)
+                        ->orderBy("CAST(SUBSTRING_INDEX(id_cpmk_langsung, '_', -1) AS UNSIGNED)", 'ASC', false)
+                        ->orderBy('id_cpmk_langsung', 'ASC', false)
                         ->get()
                         ->getResult();
     }

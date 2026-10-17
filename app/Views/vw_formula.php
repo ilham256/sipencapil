@@ -70,7 +70,8 @@
 													<tr>
 														<th style="width: 150px;">Bobot (Persen)</th>
 														<th style="width: 200px;">Kode CPMK</th>
-														<th style="width: 400px;">Nama Mata Kuliah</th>
+														<th style="width: 200px;">Kode MK</th>
+														<th style="width: 400px;">Mata Kuliah</th>
 														
 														<th></th>  
 													</tr>
@@ -99,6 +100,7 @@
 														</th>
 														<th></th>
 														<th></th>
+														<th></th>
 														
 														<th></th>
 													</tr>
@@ -109,7 +111,8 @@
 													<tr> 
 														<td><?php echo $s->persentasi; ?></td>
 														<td><?php echo $s->nama; ?></td>
-														<td><?php echo $s->nama_kode.' '.$s->nama_mata_kuliah; ?></td>
+														<td><?php echo $s->kode_mk; ?></td>
+														<td><?php echo $s->nama_mata_kuliah; ?></td>
 														
 														<td><a href="<?php echo site_url('formuladeskriptor/edit_formula_deskriptor/'.$s->id_deskriptor_rumus_cpmk); ?>"><i class="fa fa-edit" title="Edit Data produk"></i></a> |
 														<a onclick="return confirm('apakah anda ingin menghapus data')" href="<?php echo site_url('formuladeskriptor/hapus_formula_deskriptor/'.$s->id_deskriptor_rumus_cpmk); ?>"><i class="fa fa-trash" title="Hapus Data produk"></i></a> 

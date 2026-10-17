@@ -216,6 +216,9 @@ class Report extends BaseController
         $data['status_nilai_cpl_mahasiswa'] = [];
 		$data['status'] = "";
 
+
+        // Cek Formula
+
         // Mengambil data mahasiswa dari API
         $currentYear = 2024; 
         $startYear = 2019;
@@ -284,6 +287,8 @@ class Report extends BaseController
             $batas_baik = $data['katkin'][0]->batas_bawah_kategori_baik_cpl;
             $batas_sangat_baik = $data['katkin'][0]->batas_bawah_kategori_sangat_baik_cpl;
 			//dd($data,$rumus_cpl,$rumus_deskriptor);
+
+
             foreach ($data['data_cpl'] as $cpl) {
                 $n = 0;
                 foreach ($nilai_cpmk as $nilai) {
