@@ -65,6 +65,9 @@ class MatakuliahModel extends Model
         return $this->db->table($this->tableMatakuliahHasCpmk)
             ->select('*')
             ->join($this->tableCpmkLangsung, 'cpmk_langsung.id_cpmk_langsung = matakuliah_has_cpmk.id_cpmk_langsung')
+            ->orderBy("cpmk_langsung.id_cpmk_langsung REGEXP '_[0-9]+$'", 'DESC', false)
+            ->orderBy("CAST(SUBSTRING_INDEX(cpmk_langsung.id_cpmk_langsung, '_', -1) AS UNSIGNED)", 'ASC', false)
+            ->orderBy('cpmk_langsung.id_cpmk_langsung', 'ASC', false)
             ->get()
             ->getResult();
     }
