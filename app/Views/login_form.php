@@ -74,7 +74,7 @@
           </div>
           <!-- /.col -->
           <div class="col-5">
-            <p class="login-box-msg">Version 1.2</p>
+            <p class="login-box-msg">Version 1.3</p>
           </div>
           <!-- /.col -->
         </div>

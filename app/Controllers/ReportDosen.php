@@ -349,6 +349,7 @@ class ReportDosen extends BaseController
 
         if ($this->request->getPost('pilih')) {
             $nim = $this->request->getPost('nim');
+            $data['data_mahasiswa'] = $this->mahasiswaModel->getMahasiswaInfo($nim);
         }
 
 		$nilai_cpmk = $this->kinumumModel->getNilaiCpmkMahasiswa($nim);

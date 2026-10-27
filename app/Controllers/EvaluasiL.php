@@ -84,8 +84,8 @@ class EvaluasiL extends BaseController
         $rumus_deskriptor = $this->kinumum_model->getDeskriptorRumusCpmkKurikulumTerpilih($arr['kurikulum_terpilih']);
         $nilai_cpmk = $this->kinumum_model->getNilaiCpmk();
 
-        $tahun_min = 2019;
-        $tahun_max = 2019;
+        $tahun_min = 2020;
+        $tahun_max = 2020;
 
         $target = $this->katkin_model->getKatkin();
 
@@ -199,6 +199,162 @@ class EvaluasiL extends BaseController
 
         return view('vw_template', $arr);
     }
+
+    public function persemester()
+    {
+        $arr['breadcrumbs'] = 'evaluasi_l_persemester';
+        $arr['content'] = 'analisis_evaluasi_pengukuran_langsung/analisis_kinerja_cpl_persemester_vw';
+
+        $arr['status_list_nilai'] = "sembunyikan";
+        $kurikulum_terpilih = $this->kurikulumTerpilihModel->get();
+        //dd($kurikulum_terpilih[0]->kode_kurikulum);
+        $arr['kurikulum_terpilih'] = $kurikulum_terpilih[0]['kode_kurikulum'];
+
+        $arr['data_semester'] = $this->Matakuliah_model->getSemester();
+        $arr['status'] = "";
+        //dd($arr['data_semester']);
+        $arr['tahun_masuk'] = $this->mahasiswa_model->getTahunMasuk();
+        $arr['tahun_masuk_max'] = $this->mahasiswa_model->getTahunMasukMax();
+        $arr['katkin'] = $this->katkin_model->getKatkin();
+
+        $arr['data_cpl'] = $this->kinumum_model->getCpl($arr['kurikulum_terpilih']);
+
+        usort($arr['data_cpl'], function($a, $b) {
+            // Ambil angka dari id_cpl_langsung untuk dibandingkan
+            $a_number = (int) str_replace('CPL_', '', $a->id_cpl);
+            $b_number = (int) str_replace('CPL_', '', $b->id_cpl);
+            
+            return $a_number - $b_number;
+        });
+
+        $arr['nama_cpl'] = [];
+        $arr['des_cpl'] = [];
+
+        foreach ($arr['data_cpl'] as $key) {
+            array_push($arr['nama_cpl'], $key->nama);
+            array_push($arr['des_cpl'], $key->deskripsi);
+        }
+
+        $rumus_cpl = $this->kinumum_model->getCplRumusDeskriptor($arr['kurikulum_terpilih']);
+        $rumus_deskriptor = $this->kinumum_model->getDeskriptorRumusCpmkKurikulumTerpilih($arr['kurikulum_terpilih']);
+        $nilai_cpmk = $this->kinumum_model->getNilaiCpmk();
+
+        $tahun = 2020;
+
+        $target = $this->katkin_model->getKatkin();
+
+        $arr['simpanan_tahun'] = $tahun;
+        $arr['t_simpanan_tahun'] = $tahun + 1;
+
+        if ($this->request->getPost('pilih')) {
+            $arr['status'] = "tampilkan";
+            $tahun = intval($this->request->getPost('tahun_masuk'));
+            $semester = $this->request->getPost('semester');
+            $arr['semester'] = $semester;
+            $arr['simpanan_tahun'] = $tahun;
+            $arr['t_simpanan_tahun'] = $tahun + 1;
+
+            $select_tahun = [];
+            $simpan = [];
+            $nilai_std_max = [];
+            $nilai_std_min = [];
+            $nilai_cpl_average = [];
+            $nilai_cpl_mahasiswa = [];
+            $nilai_target = [];
+
+            $nilai_std_max_1 = [];
+            $nilai_std_min_1 = [];
+            $nilai_cpl_average_1 = [];
+            $nilai_cpl_mahasiswa_1 = [];
+            $target_1 = [];
+
+            $mahasiswa_2 = $this->kinumum_model->getMahasiswaTahun($tahun);
+            $mahasiswa = [];
+
+            foreach ($mahasiswa_2 as $key) {
+                $data_m = [
+                    "Nim" => $key->nim,
+                    "Nama" => $key->nama,
+                    "SemesterMahasiswa" => $key->SemesterMahasiswa,
+                    "StatusAkademik" => $key->StatusAkademik,
+                    "tahun" => $key->tahun_masuk
+                ];
+                array_push($mahasiswa, $data_m);
+            }
+
+            // dd($semester);
+
+            foreach ($arr['data_cpl'] as $key_0) {
+                $dt = [];
+                foreach ($mahasiswa as $key) {
+                    $n = 0;
+                    foreach ($nilai_cpmk as $key_2) {
+                        if ($key["Nim"] == $key_2->nim) {
+                            $n_1 = 0;
+                            foreach ($rumus_cpl as $key_4) {
+                                if ($key_0->id_cpl_langsung == $key_4->id_cpl_langsung) {
+                                    foreach ($rumus_deskriptor as $key_3) {
+                                        if ($key_4->id_cpl_rumus_deskriptor == $key_3->id_deskriptor) {
+                                            if ($key_2->id_matakuliah_has_cpmk == $key_3->id_matakuliah_has_cpmk && $key_3->id_semester <= $semester) {
+                                                $n_1 += $key_4->persentasi * $key_2->nilai_langsung * $key_3->persentasi;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            $n += $n_1;
+                        }
+                    }
+                    array_push($dt, $n);
+                }
+                $j = 0;
+                foreach ($dt as $k) {
+                    if ($k > 0.0) {
+                        $j += 1;
+                    }
+                }
+
+                if ($j == 0) {
+                    $j = 1;
+                }
+
+                $dt_avg = array_sum($dt) / $j;
+
+                array_push($nilai_cpl_mahasiswa_1, $dt);
+                array_push($nilai_cpl_average_1, round($dt_avg));
+            }
+            
+
+            $arr['target'] = [];
+            $arr['nilai_max'] = [];
+            $arr['nilai_cpl'] = $nilai_cpl_average_1;
+
+            $arr['cpl'] = [];
+
+            foreach ($arr['data_cpl'] as $key_0) {
+                $t = 0;
+                    foreach ($rumus_cpl as $key_4) {
+                        if ($key_0->id_cpl_langsung == $key_4->id_cpl_langsung) {
+                            foreach ($rumus_deskriptor as $key_3) {
+                                if ($key_4->id_cpl_rumus_deskriptor == $key_3->id_deskriptor) {
+                                    if ( $key_3->id_semester <= $semester) {
+                                        $t += $key_4->persentasi * $key_3->persentasi;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                array_push($arr['nilai_max'], $t*100);
+                array_push($arr['target'], $t*100*$target[0]->nilai_target_pencapaian_cpl/100);
+                array_push($arr['cpl'], $key_0->nama);
+            }
+        }
+
+        //dd($arr);
+
+        return view('vw_template', $arr);
+    }
+
 
     public function index2() {
 

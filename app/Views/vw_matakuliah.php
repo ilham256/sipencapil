@@ -72,6 +72,7 @@
                         <th>#</th>
                         <th>Kode</th> 
                         <th>Mata Kuliah</th> 
+                        <th>Semester</th>
                         <th>SKS</th>  
                         <th></th> 
                     </tr>  
@@ -82,6 +83,7 @@
                             <td><?= $i; ?></td>
                             <td><?= $r->kode_mk; ?></td>
                             <td><a href="#" data-toggle="modal" data-target="#editModal<?= $r->kode_mk ?>"> <?= $r->nama_mata_kuliah; ?> </a></td>
+                            <td><?= $r->id_semester; ?></td>
                             <td><?= $r->sks; ?></td>
                             <td>
                                 <a href="#" data-toggle="modal" data-target="#hapusModal<?= $r->kode_mk ?>"><i class="fa fa-trash" title="Hapus Data produk"></i></a>
@@ -166,7 +168,8 @@
                   <tr>
                     <th>#</th>
                         <th>Kode</th> 
-                        <th>Mata Kuliah</th> 
+                        <th>Mata Kuliah</th>
+                        <th>Semester</th>
                         <th>SKS</th> 
                         <th></th> 
                   </tr>

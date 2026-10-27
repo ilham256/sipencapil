@@ -1,0 +1,218 @@
+<div class="col-lg-12">
+	<div class="card">
+		<div class="card-body">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="card card-secondary">
+							<div class="card-header" style="background-color: #216a8d; color: #FFFFFF;">
+								<h3 class="card-title"> <i class="nav-icon fas fa-file-alt"></i>&nbsp; Laporan Mahasiswa</h3>
+							</div> 
+							<!-- /.card-header -->
+							<form role="form" id="contactform" action="<?php echo site_url('report/mahasiswa_sementara')?>" method="post">
+							<div class="card-body">
+								<div class="container-fluid">
+									<select id="nim_3" class="form-control select2 select2-danger" name="nim_2" required>
+										<option value="" style="background: lightblue;" selected disabled>- Mahasiswa -</option>
+										<?php $i = 1; foreach($data_mahasiswa as $d) { ?>
+										<option value="<?php echo $d->nim; ?>"><?php echo $d->nim.' - '.$d->nama.' - '.$d->tahun_masuk; ?></option>
+										<?php $i++; } ?>
+									</select>
+									<p></p>
+									<select id="semester" class="form-control select2 select2-danger" name="semester" required>
+										<option value="" style="background: lightblue;" selected disabled>- Semester -</option>
+										<?php $i = 1; foreach($semester as $d) { ?>
+										<option value="<?php echo $d->id_semester; ?>"><?php echo $d->id_semester?></option>
+										<?php $i++; } ?>
+									</select>
+								</div>
+							</div>
+							<!-- /.card-body -->
+							<div class="card-footer">
+								<button type="submit" class="btn btn-secondary" name="pilih_2" value="pilih_2" style="background-color: #216a8d; color: #FFFFFF;">Tampilkan</button>
+								
+							</div>
+							</form>
+							<!-- /.card-footer -->
+						<!-- /.card -->
+						</div>
+					</div>
+					<!-- ./col -->
+					<?php if ($status == 'tampilkan') { ?>
+					<div class="col-lg-3 col-6">
+						<!-- small box -->
+						<div class="small-box" style="background-color: #216a8d; color: #FFFFFF;">
+							<div class="inner">
+								<p>Kurikulum</p>
+
+								<h2><?php echo $kurikulum_mahasiswa	;?></h2>
+							</div>
+							<div class="icon">
+								<i class="ion ion-university"></i>
+							</div>
+						</div>			
+					</div>
+					<?php } ?>
+					
+				</div>
+			</div>
+
+			<?php if ($status == 'tampilkan') { ?>
+			<div class="card card-dark" id="printCard">
+				<div class="card-header" style="background-color: #216a8d; color: #FFFFFF;">
+
+				</div>
+				<div class="card-body">	
+					
+
+							<div class="text-center" style="color: #216a8d; font-size: 24px;">
+								<p><strong>INSTITUT PERTANIAN BOGOR<br>
+								FAKULTAS TEKNIK DAN TEKNOLOGI<br>
+								PROGRAM SARJANA TEKNIK SIPIL DAN LINGKUNGAN
+								<br><hr>
+								</strong>
+								</p>
+							</div>
+
+						<div class="row">
+						    <!-- Nama Lengkap -->
+						    <div class="col-md-6 col-12">
+						        <div style="font-weight: bold; color: #216a8d;">
+						            Nama Lengkap
+						        </div>
+						        <div style="font-weight: bold; color: grey;">
+						            <?= $nama_rapor_mahasiswa; ?>
+						        </div>
+						    </div>
+
+						    <!-- Semester -->
+						    <div class="col-md-6 col-12">
+						        <div style="font-weight: bold; color: #216a8d;">
+						            Progres Semester
+						        </div>
+						        <div style="font-weight: bold; color: grey;">
+						            <?= $semester_mahasiswa; ?>
+						        </div>
+						    </div>
+						</div>
+
+						<br>
+
+						<!-- Nomor Induk Mahasiswa -->
+						<div class="row">
+						    <div class="col-md-6 col-12">
+						        <div style="font-weight: bold; color: #216a8d;">
+						            Nomor Induk Mahasiswa
+						        </div>
+						        <div style="font-weight: bold; color: grey;">
+						            <?= $nim_rapor_mahasiswa; ?>
+						        </div>
+						    </div>
+						</div>
+						<br>
+						<table class="table"> 
+							<thead style="background-color: #216a8d; color: white;  ">
+								<tr>
+									<th style='font-weight: normal; vertical-align: middle; text-align: center;'>Capaian Pembelajaran Lulusan</th>
+									<th style='font-weight: normal; vertical-align: middle; text-align: center;'>Deskripsi</th>
+									<th style='font-weight: normal; vertical-align: middle; text-align: center;'>Persentase Nilai Masuk</th> 
+									<th style='font-weight: normal; vertical-align: middle; text-align: center;'>Nilai Sementara</th> 
+									<th style='font-weight: normal; vertical-align: middle; text-align: center;'>Pencapaian</th> 
+								</tr> 
+							</thead>  
+							<tbody > 
+
+								<?php for ($i=0; $i < count($data_cpl); $i++) { ?>
+								<tr> 
+									<th scope="row"><?php  echo $data_cpl[$i]->nama ; ?></th> 
+									<td style="text-align: justify; "><p><?php  echo ($data_cpl[$i]->deskripsi); ?></p></td> 
+									<td style="text-align: center; "><?php echo (round($persentase_nilai_masuk_cpl_mahasiswa[$i],4)*100); ?> % </td>
+									<td style="text-align: center; "><?php echo (round($nilai_cpl_mahasiswa[$i],2)); ?></td> 
+									<td><?php echo $status_nilai_cpl_mahasiswa[$i]; ?></td> 
+								</tr> 
+								<?php } ?>
+							</tbody>  
+						</table>
+						<table class="table">
+							<tbody>
+    						<tr>
+							<!-- Kolom kosong di kiri (bisa diisi ttd lain jika butuh, misal lebar 70%) -->
+						    <td style="width: 70%;"></td>
+    
+						    <!-- Kolom tanda tangan di kanan (lebar 30%, teks rata tengah) -->
+						    <td style="width: 30%; text-align: center;">
+						    		<br>
+ 						       <p>Ketua Program Studi</p>
+							        <br><br><br> <!-- Ruang untuk tanda tangan asli/stempel -->
+ 						       <p>
+            						<strong>Tri Sudibyo S.T., M.Sc., Ph.D.</strong><br>
+            						NIP. 198405302014041001
+        						</p>
+    						</td>
+							</tr>
+							</tbody>
+						</table>
+						<div class="float-end margin-top-50">
+						</div>
+					
+					<!-- /.invoice-box -->
+					<p><?php  //echo '<pre>';  var_dump($data_cpl); echo '</pre>';?></p>
+				</div>
+				<!-- /.col-xs-12 -->
+			</div>
+
+			<div class="float-end margin-top-50">
+				<form role="form" id="contactform" action="<?php echo site_url('report/periksa_kekurangan_cpmk_mahasiswa')?>" method="post">
+					<input type="hidden" name="nim" value="<?php echo $nim_rapor_mahasiswa; ?>">
+					<button type="submit" class="btn btn-default waves-effect waves-light" name="pilih" value="pilih"><i class="nav-icon fas fa-search"></i>&nbsp; Periksa Kekurangan Nilai
+					</button>
+					<button class="btn btn-primary" onclick="printDiv()"><i class="nav-icon fas fa-print"></i>&nbsp; Cetak Laporan Mahasiswa
+					</button>
+				</form>			
+			</div>
+
+
+			<?php } ?>					
+
+		</div>
+		<!-- /.box-content -->
+	</div>
+	<!-- /.col-lg-9 col-xs-12 -->
+</div>
+
+<!-- chart.js Chart -->
+<script src="<?php echo base_url() ?>plugin/chart/node_modules/chartjs-plugin-error-bars/node_modules/chart.js/dist/Chart.bundle.min.js"></script>
+<script src="<?php echo base_url() ?>plugin/chart/node_modules/chartjs-plugin-error-bars/build/Plugin.Errorbars.js"></script>
+
+ <script>
+
+    function printDiv() {
+        // 1. Simpan title asli dokumen
+        var originalTitle = document.title;
+        
+        // 2. Ubah title dokumen menggunakan variabel PHP (Ini akan menjadi nama file PDF)
+        // Saya asumsikan format filenya menjadi: Raport_NIM_NamaMahasiswa
+        document.title = "Raport_<?php echo $nim_rapor_mahasiswa; ?>_<?php echo $nama_rapor_mahasiswa; ?>";
+
+        // 3. Proses isolate div seperti script Anda
+        var printContents = document.getElementById('printCard').innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+        
+        // 4. Panggil print
+        window.print();
+        
+        // 5. Kembalikan konten dan title seperti semula
+        document.body.innerHTML = originalContents;
+        document.title = originalTitle;
+        
+        // 6. Reload halaman (Sangat disarankan di AdminLTE agar sidebar dan JS bawaan tidak error setelah body di-replace)
+        window.location.reload(); 
+    }
+</script>
+
+ 
+
+
+<?php  //echo '<pre>';  var_dump($mk_cpmk[0]); echo '</pre>';?>

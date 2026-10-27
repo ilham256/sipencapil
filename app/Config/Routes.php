@@ -138,6 +138,8 @@ $routes->group('evaluasil', ['namespace' => 'App\Controllers'], function ($route
     $routes->get('identifikasi/(:segment)', 'EvaluasiL::identifikasi/$1');
     $routes->get('evaluasikinerjacpl', 'EvaluasiL::evaluasikinerjacpl');
     $routes->post('evaluasikinerjacpl', 'EvaluasiL::evaluasikinerjacpl');
+    $routes->get('persemester', 'EvaluasiL::persemester');
+    $routes->post('persemester', 'EvaluasiL::persemester');
 });
 
 $routes->group('evaluasildosen', function ($routes) {
@@ -251,6 +253,7 @@ $routes->group('mahasiswa', function($routes) {
     $routes->get('/', 'Mahasiswa::index');
     $routes->get('tambah', 'Mahasiswa::tambah');
     $routes->post('submitTambah', 'Mahasiswa::submitTambah');
+    $routes->post('submit_edit', 'Mahasiswa::submit_edit');
     $routes->get('exportExcel', 'Mahasiswa::exportExcel');
     $routes->post('uploadExcel', 'Mahasiswa::uploadExcel');
     $routes->get('downloadTemplate', 'Mahasiswa::downloadTemplate');    
@@ -316,8 +319,10 @@ $routes->group('relevansippm', ['namespace' => 'App\Controllers'], function($rou
 $routes->get('/report', 'Report::index');
 $routes->post('/report', 'Report::index');
 $routes->get('/report/mahasiswa', 'Report::mahasiswa');
+$routes->get('/report/mahasiswa_sementara', 'Report::mahasiswa_sementara');
 $routes->get('/report/kinerja_cpmk_mahasiswa', 'Report::kinerja_cpmk_mahasiswa');
 $routes->post('/report/mahasiswa', 'Report::mahasiswa');
+$routes->post('/report/mahasiswa_sementara', 'Report::mahasiswa_sementara');
 $routes->post('/report/kinerja_cpmk_mahasiswa', 'Report::kinerja_cpmk_mahasiswa');
 $routes->post('/report/download_report_mahasiswa', 'Report::download_report_mahasiswa');
 $routes->get('/report/mata_kuliah', 'Report::mata_kuliah');

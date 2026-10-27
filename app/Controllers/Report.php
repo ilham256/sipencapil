@@ -344,6 +344,164 @@ class Report extends BaseController
         return view('vw_template', $data);
     }
 
+    public function mahasiswa_sementara()
+    {
+        $data['breadcrumbs'] = 'report_mahasiswa_sementara';
+        $data['content'] = 'report/vw_report_mahasiswa_sementara';
+
+        $data['mata_kuliah'] = $this->matakuliahModel->getMatakuliah();
+        $data['katkin'] = $this->katkinModel->getKatkin();
+        
+        $data['data_mahasiswa'] = $this->mahasiswaModel->getMahasiswa();
+
+        $data['semester'] = $this->kincplModel->getSemester();
+        //dd($data['semester']);
+        $data['nilai_cpl_mahasiswa'] = [];
+        $data['persentase_nilai_masuk_cpl_mahasiswa'] = [];
+        $data['status_nilai_cpl_mahasiswa'] = [];
+        $data['status'] = "";
+
+
+        // Cek Formula
+
+        // Mengambil data mahasiswa dari API
+        $currentYear = 2024; 
+        $startYear = 2019;
+        $tahun_report = range($startYear, $currentYear - 1);
+
+        $kurikulum_terpilih = $this->kurikulumTerpilihModel->get();
+        //dd($kurikulum_terpilih[0]->kode_kurikulum);
+        $arr['kurikulum_terpilih'] = $kurikulum_terpilih[0]['kode_kurikulum'];
+
+        $data['data_cpl'] = $this->kinumumModel->getCpl($arr['kurikulum_terpilih']);
+
+        usort($data['data_cpl'], function($a, $b) {
+            // Ambil angka dari id_cpl_langsung untuk dibandingkan
+            $a_number = (int) str_replace('CPL_', '', $a->id_cpl);
+            $b_number = (int) str_replace('CPL_', '', $b->id_cpl);
+            
+            return $a_number - $b_number;
+        });
+        
+
+        // Sub Menu Rapor Mahasiswa
+        
+        
+        $nilai_cpmk = $this->kinumumModel->getNilaiCpmk();
+        //dd($nilai_cpmk);
+
+        $pilih_2 = $this->request->getPost('pilih_2');
+
+        if (!empty($pilih_2)) {
+            $data['status_aktif'] = '';
+            $data['status_aktif_2'] = 'show active';
+            $data['status_aktif_3'] = '';
+
+            $data['naf'] = '';
+            $data['naf_2'] = 'active';
+            $data['naf_3'] = '';
+
+            $nim_2 = $this->request->getPost('nim_2', FILTER_SANITIZE_STRING);
+            $semester = $this->request->getPost('semester', FILTER_SANITIZE_STRING);
+            $data['semester_mahasiswa'] = $semester;
+            $data['nim_2'] = $nim_2;
+            $data['status'] = "tampilkan";
+            //dd($data);
+            // Mengecek Kuikulum yang digunakan Mahasiswa
+            $data_kurikulum_mahasiswa = $this->mahasiswaModel->getMahasiswaKurikulum($data['nim_2']);
+            $info_mahasiswa = $this->mahasiswaModel->getMahasiswaInfo($data['nim_2']);
+            $data['kurikulum_mahasiswa'] = $data_kurikulum_mahasiswa[0]->kode_kurikulum;
+
+            $data['data_cpl'] = $this->kinumumModel->getCpl($data['kurikulum_mahasiswa']);
+
+            usort($data['data_cpl'], function($a, $b) {
+                // Ambil angka dari id_cpl_langsung untuk dibandingkan
+                $a_number = (int) str_replace('CPL_', '', $a->id_cpl);
+                $b_number = (int) str_replace('CPL_', '', $b->id_cpl);
+                
+                return $a_number - $b_number;
+            });
+
+            $rumus_cpl = $this->kinumumModel->getCplRumusDeskriptor($data['kurikulum_mahasiswa']);
+            
+            $rumus_deskriptor = $this->kinumumModel->getDeskriptorRumusCpmkKurikulumTerpilih($data['kurikulum_mahasiswa']);
+            
+            //dd($rumus_deskriptor);
+            $data['nama_rapor_mahasiswa'] = $info_mahasiswa[0]->nama;
+            $data['nim_rapor_mahasiswa'] = $info_mahasiswa[0]->nim;
+
+            $batas_cukup = $data['katkin'][0]->batas_bawah_kategori_cukup_cpl;
+            $batas_baik = $data['katkin'][0]->batas_bawah_kategori_baik_cpl;
+            $batas_sangat_baik = $data['katkin'][0]->batas_bawah_kategori_sangat_baik_cpl;
+            //dd($data,$rumus_cpl,$rumus_deskriptor);
+
+
+            foreach ($data['data_cpl'] as $cpl) {
+                $n = 0;
+                $t = 0;
+                foreach ($nilai_cpmk as $nilai) {
+                    if ($data['nim_rapor_mahasiswa'] == $nilai->nim) {
+                        $n_1 = 0;
+                        $t_1 = 0;
+                        foreach ($rumus_cpl as $rumus_cpl_item) {
+                            if ($cpl->id_cpl_langsung == $rumus_cpl_item->id_cpl_langsung) {
+                                foreach ($rumus_deskriptor as $rumus_deskriptor_item) {
+                                    if ($rumus_cpl_item->id_cpl_rumus_deskriptor == $rumus_deskriptor_item->id_deskriptor) {
+                                        if ($nilai->id_matakuliah_has_cpmk == $rumus_deskriptor_item->id_matakuliah_has_cpmk && $rumus_deskriptor_item->id_semester <= $semester) {
+                                            $n_1 += $rumus_cpl_item->persentasi * $nilai->nilai_langsung * $rumus_deskriptor_item->persentasi;
+                                            $t_1 += $rumus_cpl_item->persentasi * $rumus_deskriptor_item->persentasi;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        $n += $n_1;
+                        $t += $t_1;
+                    }
+                }
+                if ($t != 0) {
+                    array_push($data['nilai_cpl_mahasiswa'], $n / $t);
+                } else {
+                    array_push($data['nilai_cpl_mahasiswa'], 0);
+                }
+                array_push($data['persentase_nilai_masuk_cpl_mahasiswa'], $t);
+            }
+           //dd($data['persentase_nilai_masuk_cpl_mahasiswa']);
+            foreach ($data['nilai_cpl_mahasiswa'] as $nilai_cpl) {
+                if ($nilai_cpl > $batas_sangat_baik) {
+                    $status_cpl_mahasiswa = 'Memenuhi';
+                } elseif ($nilai_cpl > $batas_baik) {
+                    $status_cpl_mahasiswa = 'Memenuhi';
+                } elseif ($nilai_cpl > $batas_cukup) {
+                    $status_cpl_mahasiswa = 'Tidak Memenuhi';
+                } elseif ($nilai_cpl == 0) {
+                    $status_cpl_mahasiswa = ' ';
+                } else {
+                    $status_cpl_mahasiswa = 'Tidak Memenuhi';
+                }
+                array_push($data['status_nilai_cpl_mahasiswa'], $status_cpl_mahasiswa);
+            }
+        } else {
+            foreach ($data['data_cpl'] as $cpl) {
+                array_push($data['nilai_cpl_mahasiswa'], '-');
+                array_push($data['status_nilai_cpl_mahasiswa'], '-');
+            }
+            $data['nama_rapor_mahasiswa'] = '-';
+            $data['nim_rapor_mahasiswa'] = '-';
+            $data['ttl_rapor_mahasiswa'] = '-';
+            $data['tahun_masuk_rapor_mahasiswa'] = '-';
+        }
+        //dd($data);
+        // Sub Menu Rapor Mata Kuliah
+        // echo '<pre>';  var_dump($data['nilai_mk_raport']); echo '</pre>';
+        // echo '<pre>';  var_dump($nilai_mahasiswa_tak_langsung); echo '</pre>';
+        // echo '<pre>';  var_dump($data['nilai_mk_raport']); echo '</pre>';
+        // echo '<pre>';  var_dump($mahasiswa); echo '</pre>';
+        // echo '<pre>';  var_dump($mahasiswa[0]); echo '</pre>';
+        
+        return view('vw_template', $data);
+    }
+
 	public function periksa_kekurangan_cpmk_mahasiswa()
     {
         $data['breadcrumbs'] = 'report_mahasiswa';
@@ -355,8 +513,10 @@ class Report extends BaseController
 
         if ($this->request->getPost('pilih')) {
             $nim = $this->request->getPost('nim');
+            $data['data_mahasiswa'] = $this->mahasiswaModel->getMahasiswaInfo($nim);
         }
 
+        //dd($data['data_mahasiswa']);
 		$nilai_cpmk = $this->kinumumModel->getNilaiCpmkMahasiswa($nim);
 
 		

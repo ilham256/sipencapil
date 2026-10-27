@@ -10,6 +10,8 @@
 				<div class="card-body">	
 					
 								<p>Data Nilai Dibawah Target CPMK (<?php  echo ($target_cpmk); ?>)</p>
+								<p><?php  echo ($data_mahasiswa[0]->nim." - ".$data_mahasiswa[0]->nama); ?></p>
+
 
 						<table class="table"> 
 							<thead style="background-color: #216a8d; color: white;  ">

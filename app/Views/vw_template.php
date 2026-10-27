@@ -239,9 +239,20 @@
             </p>
             </a>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="<?= base_url('evaluasil/persemester') ?>" class="nav-link <?php if ($breadcrumbs == 'evaluasi_l_persemester') {echo "active";}?>">
+            <i class="nav-icon fas fa-chart-bar"></i>
+            <p>
+              Analisis & Evaluasi
+            </p>
+            <br>
+            &ensp;&ensp;&ensp;&ensp;
+            <p>Progres PerSemester</p>
+            </a>
+          </li>
 
-          <li class="nav-item <?php if (in_array($breadcrumbs, ['report', 'report_epbm','report_kinerja_cpmk_mahasiswa','report_mahasiswa','report_mata_kuliah','report_relevansi_ppm','report_efektivitas_cpl'])) {echo "menu-open";}?>">
-            <a href="report" class="nav-link <?php if (in_array($breadcrumbs, ['report', 'report_epbm','report_kinerja_cpmk_mahasiswa','report_mahasiswa','report_mata_kuliah','report_relevansi_ppm','report_efektivitas_cpl'])) {echo "active";}?>">
+          <li class="nav-item <?php if (in_array($breadcrumbs, ['report', 'report_epbm','report_kinerja_cpmk_mahasiswa','report_mahasiswa','report_mahasiswa_sementara','report_mata_kuliah','report_relevansi_ppm','report_efektivitas_cpl'])) {echo "menu-open";}?>">
+            <a href="report" class="nav-link <?php if (in_array($breadcrumbs, ['report', 'report_epbm','report_kinerja_cpmk_mahasiswa','report_mahasiswa','report_mahasiswa_sementara','report_mata_kuliah','report_relevansi_ppm','report_efektivitas_cpl'])) {echo "active";}?>">
             <i class="nav-icon fas fa-file-alt"></i>
             <p>
               Laporan
@@ -265,6 +276,15 @@
                 <a href="<?= base_url('report/mahasiswa') ?>" class="nav-link <?php if ($breadcrumbs == 'report_mahasiswa') {echo "active";}?>">
                 <i class="far fa-circle nav-icon"></i> 
                 <p>Report Mahasiswa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('report/mahasiswa_sementara') ?>" class="nav-link <?php if ($breadcrumbs == 'report_mahasiswa_sementara') {echo "active";}?>">
+                <i class="far fa-circle nav-icon"></i> 
+                <p>Report Mahasiswa</p>
+                </p><br>
+                &ensp;&ensp;&ensp;&ensp;
+                <p>(Sementara)</p>
                 </a>
               </li>
               <li class="nav-item">

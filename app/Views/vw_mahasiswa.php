@@ -118,11 +118,52 @@
 								<tr>
 									<td scope="row"><?php echo $i; ?></td>
 									<td><span class="label label-success"><?php echo $r->nim; ?></span></td>
-									<td><?php echo $r->nama; ?></td>
+									<td><a href="#" data-toggle="modal" data-target="#editModal<?= $r->nim ?>"> <?= $r->nama; ?> </a></td>
 									<td><?php echo $r->tahun_masuk; ?></td>
 									<td><?php echo $r->kode_kurikulum; ?></td>
 									<td><?php echo $r->StatusAkademik; ?></td>
 								</tr>
+
+									<div class="modal fade" id="editModal<?= $r->nim ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel<?= $r->nim ?>" aria-hidden="true">
+			                            <div class="modal-dialog">
+			                                <div class="modal-content">
+			                                <div class="modal-header">
+			                                    <h4 class="modal-title">Edit Mahasiswa <?= $r->nim; ?></h4>
+			                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                                    <span aria-hidden="true">&times;</span>
+			                                    </button>
+			                                </div>
+			                                <form method="post" action="<?php echo site_url('mahasiswa/submit_edit') ?>" enctype="multipart/form-data">
+			                                <div class="modal-body">			
+			                                    <div class="form-group">
+			                                        <label for="exampleInputEmail1">Kode Kurikulum</label>
+			                                        <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $r->kode_kurikulum	;?>" name="kode_kurikulum" maxlength="10" required >
+			                                        <input type="hidden" name="nim" value="<?php echo $r->nim	;?>">
+
+			                                    </div>
+			                                    <div class="form-group">
+			                                        <label for="exampleInputEmail1">Nama</label>
+			                                        <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $r->nama	;?>" name="nama" maxlength="64" required>
+			                                    </div>
+			                                    <div class="form-group">
+			                                        <label for="exampleInputEmail1">Tahun Masuk</label>
+			                                        <input type="number" class="form-control" id="exampleInputEmail1" value="<?php echo $r->tahun_masuk	;?>" name="tahun_masuk" required>
+			                                    </div>
+			                                    <div class="form-group">
+			                                        <label for="exampleInputEmail1">Status Akademik</label>
+			                                        <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $r->StatusAkademik	;?>" name="StatusAkademik" maxlength="32" required>
+			                                    </div>
+			                                </div>
+			                                <div class="modal-footer justify-content-between">
+			                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			                                    <button type="submit" class="btn btn-primary" name="simpan" value="simpan" onclick="return confirm('Save Data ?')" >Simpan</button>
+			                                </div>
+			                                </form>
+			                                </div>
+			                                <!-- /.modal-content -->
+			                            </div>								
+			                            <!-- /.modal-dialog -->
+			                        </div>
 								<?php $i++; } ?>
 
 							</tbody>

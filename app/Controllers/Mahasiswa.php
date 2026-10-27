@@ -27,9 +27,33 @@ class Mahasiswa extends Controller {
         $data['content'] = 'vw_mahasiswa';
         $data['datas'] = $this->mahasiswaModel->getMahasiswa();
         $data['jumlah_mahasiswa'] = count($data['datas']);
+
+        //dd($data);
         echo view('vw_template', $data);
     }
- 
+    
+
+    public function submit_edit()
+    {
+        if ($this->request->getPost('simpan')) {
+            $save_data = [
+                'kode_kurikulum' => $this->request->getPost('kode_kurikulum', FILTER_SANITIZE_STRING),
+                'nama' => $this->request->getPost('nama', FILTER_SANITIZE_STRING),
+                'StatusAkademik' => $this->request->getPost('StatusAkademik', FILTER_SANITIZE_STRING),
+                'tahun_masuk' => $this->request->getPost('tahun_masuk', FILTER_SANITIZE_STRING),
+            ];
+            $id_edit = $this->request->getPost('nim', FILTER_SANITIZE_STRING);
+
+            $query = $this->mahasiswaModel->submitEdit($save_data, $id_edit);
+            if ($query) {
+                session()->setFlashdata('success', 'Data berhasil diubah!');
+                return redirect()->to('/mahasiswa');
+            }
+        }
+    }
+
+
+
     public function tambah() {
         $data['breadcrumbs'] = 'mahasiswa';
         $data['content'] = 'mahasiswa/tambah';
