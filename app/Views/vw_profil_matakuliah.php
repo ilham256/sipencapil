@@ -111,7 +111,7 @@
 											<div class="modal-body">			
 												<div class="form-group">
 													<label for="exampleInputEmail1">Kode Matakuliah</label>
-													<input type="text" class="form-control" id="exampleInputEmail1" placeholder="<?php echo $p->kode_mk	;?>" name="kurikulum" disabled>
+													<input type="text" class="form-control" id="exampleInputEmail1" placeholder="<?php echo $r->kode_mk	;?>" name="kurikulum" disabled>
 													<input type="hidden" name="mk" value="<?php echo $r->kode_mk	;?>">
 												</div>
 												<div class="form-group">

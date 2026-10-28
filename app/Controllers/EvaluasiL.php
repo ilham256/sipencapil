@@ -50,9 +50,10 @@ class EvaluasiL extends BaseController
    public function index()
     {
         $arr['breadcrumbs'] = 'evaluasi_l';
-        $arr['content'] = 'analisis_evaluasi_pengukuran_langsung/analisis_kinerja_cpl_vw';
+        $arr['content'] = 'analisis_evaluasi_pengukuran_langsung/analisis_kinerja_cpl_vw'; 
 
         $arr['status_list_nilai'] = "sembunyikan";
+        $arr['status'] = "";
         $kurikulum_terpilih = $this->kurikulumTerpilihModel->get();
         //dd($kurikulum_terpilih[0]->kode_kurikulum);
         $arr['kurikulum_terpilih'] = $kurikulum_terpilih[0]['kode_kurikulum'];
@@ -95,6 +96,7 @@ class EvaluasiL extends BaseController
         $arr['t_simpanan_tahun_max'] = $tahun_max + 1;
 
         if ($this->request->getPost('pilih')) {
+            $arr['status'] = "tampilkan";
             $tahun_min = intval($this->request->getPost('tahun_masuk_min'));
             $arr['simpanan_tahun_min'] = $tahun_min;
             $arr['t_simpanan_tahun_min'] = $tahun_min + 1;
@@ -102,99 +104,98 @@ class EvaluasiL extends BaseController
             $tahun_max = intval($this->request->getPost('tahun_masuk_max'));
             $arr['simpanan_tahun_max'] = $tahun_max;
             $arr['t_simpanan_tahun_max'] = $tahun_max + 1;
-        }
 
-        $arr['tahun_masuk_select'] = [];
+            $arr['tahun_masuk_select'] = [];
 
-        for ($i=$tahun_min; $i <= $tahun_max ; $i++) { 
-            array_push($arr['tahun_masuk_select'] , $i);
-        }
-
-
-        $select_tahun = [];
-        $simpan = [];
-        $nilai_std_max = [];
-        $nilai_std_min = [];
-        $nilai_cpl_average = [];
-        $nilai_cpl_mahasiswa = [];
-        $nilai_target = [];
-
-        foreach ($arr['tahun_masuk_select'] as $tahun) {
-            $nilai_std_max_1 = [];
-            $nilai_std_min_1 = [];
-            $nilai_cpl_average_1 = [];
-            $nilai_cpl_mahasiswa_1 = [];
-            $target_1 = [];
-
-            $mahasiswa_2 = $this->kinumum_model->getMahasiswaTahun($tahun);
-            $mahasiswa = [];
-
-            foreach ($mahasiswa_2 as $key) {
-                $data_m = [
-                    "Nim" => $key->nim,
-                    "Nama" => $key->nama,
-                    "SemesterMahasiswa" => $key->SemesterMahasiswa,
-                    "StatusAkademik" => $key->StatusAkademik,
-                    "tahun" => $key->tahun_masuk
-                ];
-                array_push($mahasiswa, $data_m);
+            for ($i=$tahun_min; $i <= $tahun_max ; $i++) { 
+                array_push($arr['tahun_masuk_select'] , $i);
             }
 
-            foreach ($arr['data_cpl'] as $key_0) {
-                $dt = [];
-                foreach ($mahasiswa as $key) {
-                    $n = 0;
-                    foreach ($nilai_cpmk as $key_2) {
-                        if ($key["Nim"] == $key_2->nim) {
-                            $n_1 = 0;
-                            foreach ($rumus_cpl as $key_4) {
-                                if ($key_0->id_cpl_langsung == $key_4->id_cpl_langsung) {
-                                    foreach ($rumus_deskriptor as $key_3) {
-                                        if ($key_4->id_cpl_rumus_deskriptor == $key_3->id_deskriptor) {
-                                            if ($key_2->id_matakuliah_has_cpmk == $key_3->id_matakuliah_has_cpmk) {
-                                                $n_1 += $key_4->persentasi * $key_2->nilai_langsung * $key_3->persentasi;
+
+            $select_tahun = [];
+            $simpan = [];
+            $nilai_std_max = [];
+            $nilai_std_min = [];
+            $nilai_cpl_average = [];
+            $nilai_cpl_mahasiswa = [];
+            $nilai_target = [];
+
+            foreach ($arr['tahun_masuk_select'] as $tahun) {
+                $nilai_std_max_1 = [];
+                $nilai_std_min_1 = [];
+                $nilai_cpl_average_1 = [];
+                $nilai_cpl_mahasiswa_1 = [];
+                $target_1 = [];
+
+                $mahasiswa_2 = $this->kinumum_model->getMahasiswaTahun($tahun);
+                $mahasiswa = [];
+
+                foreach ($mahasiswa_2 as $key) {
+                    $data_m = [
+                        "Nim" => $key->nim,
+                        "Nama" => $key->nama,
+                        "SemesterMahasiswa" => $key->SemesterMahasiswa,
+                        "StatusAkademik" => $key->StatusAkademik,
+                        "tahun" => $key->tahun_masuk
+                    ];
+                    array_push($mahasiswa, $data_m);
+                }
+
+                foreach ($arr['data_cpl'] as $key_0) {
+                    $dt = [];
+                    foreach ($mahasiswa as $key) {
+                        $n = 0;
+                        foreach ($nilai_cpmk as $key_2) {
+                            if ($key["Nim"] == $key_2->nim) {
+                                $n_1 = 0;
+                                foreach ($rumus_cpl as $key_4) {
+                                    if ($key_0->id_cpl_langsung == $key_4->id_cpl_langsung) {
+                                        foreach ($rumus_deskriptor as $key_3) {
+                                            if ($key_4->id_cpl_rumus_deskriptor == $key_3->id_deskriptor) {
+                                                if ($key_2->id_matakuliah_has_cpmk == $key_3->id_matakuliah_has_cpmk) {
+                                                    $n_1 += $key_4->persentasi * $key_2->nilai_langsung * $key_3->persentasi;
+                                                }
                                             }
                                         }
                                     }
                                 }
+                                $n += $n_1;
                             }
-                            $n += $n_1;
+                        }
+                        array_push($dt, $n);
+                    }
+                    $j = 0;
+                    foreach ($dt as $k) {
+                        if ($k > 0.0) {
+                            $j += 1;
                         }
                     }
-                    array_push($dt, $n);
-                }
-                $j = 0;
-                foreach ($dt as $k) {
-                    if ($k > 0.0) {
-                        $j += 1;
+
+                    if ($j == 0) {
+                        $j = 1;
                     }
+
+                    $dt_avg = array_sum($dt) / $j;
+
+                    array_push($nilai_cpl_mahasiswa_1, $dt);
+                    array_push($nilai_cpl_average_1, round($dt_avg));
+                    array_push($nilai_std_max_1, $dt_avg + 5);
+                    array_push($nilai_std_min_1, $dt_avg - 5);
+                    array_push($target_1, $target[0]->nilai_target_pencapaian_cpl);
                 }
 
-                if ($j == 0) {
-                    $j = 1;
-                }
-
-                $dt_avg = array_sum($dt) / $j;
-
-                array_push($nilai_cpl_mahasiswa_1, $dt);
-                array_push($nilai_cpl_average_1, round($dt_avg));
-                array_push($nilai_std_max_1, $dt_avg + 5);
-                array_push($nilai_std_min_1, $dt_avg - 5);
-                array_push($target_1, $target[0]->nilai_target_pencapaian_cpl);
+                array_push($nilai_cpl_mahasiswa, $nilai_cpl_mahasiswa_1);
+                array_push($nilai_cpl_average, $nilai_cpl_average_1);
+                array_push($nilai_std_max, $nilai_std_max_1);
+                array_push($nilai_std_min, $nilai_std_min_1);
+                array_push($nilai_target, $target_1);
             }
 
-            array_push($nilai_cpl_mahasiswa, $nilai_cpl_mahasiswa_1);
-            array_push($nilai_cpl_average, $nilai_cpl_average_1);
-            array_push($nilai_std_max, $nilai_std_max_1);
-            array_push($nilai_std_min, $nilai_std_min_1);
-            array_push($nilai_target, $target_1);
+            $arr['target'] = $nilai_target;
+            $arr['nilai_cpl'] = $nilai_cpl_average;
+            $arr['nilai_std_max'] = $nilai_std_max;
+            $arr['nilai_std_min'] = $nilai_std_min;
         }
-
-        $arr['target'] = $nilai_target;
-        $arr['nilai_cpl'] = $nilai_cpl_average;
-        $arr['nilai_std_max'] = $nilai_std_max;
-        $arr['nilai_std_min'] = $nilai_std_min;
-
         //dd($arr);
 
         return view('vw_template', $arr);

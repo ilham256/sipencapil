@@ -240,7 +240,7 @@ class Data extends BaseController
     public function data_cpmk()
     {
         $arr['breadcrumbs'] = 'data_cpmk';
-        $arr['content'] = 'vw_data_cpmk';
+        $arr['content'] = 'vw_data_cpmk'; 
 
         $arr['list_mahasiswa'] = $this->mahasiswaModel->getMahasiswa();
 
@@ -252,20 +252,24 @@ class Data extends BaseController
         $arr['data_cpl'] = $this->kinumumModel->getCpl($arr['kurikulum_terpilih']);
         $rumus_cpl = $this->kinumumModel->getCplRumusDeskriptor($arr['kurikulum_terpilih']);
         $arr['data_rumus_deskriptor'] = $this->kinumumModel->getDeskriptorRumusCpmkKurikulumTerpilih($arr['kurikulum_terpilih']);
+        //dd($arr);
         $arr['nilai'] = [];
         $nim = "-";
-
+        $arr['status'] = "";
         if ($this->request->getPost('pilih')) {
+            $arr['status'] = "tampilkan";
             $nim = $this->request->getPost('nim');
+        
+
+            $arr['data_mahasiswa'] = $this->kinumumModel->getDataMahasiswa($nim);
+
+            foreach ($arr['data_rumus_deskriptor'] as $key) {
+                $nilai = $this->kinumumModel->getNilaiCpmkSelect($nim . "_" . $key->id_matakuliah_has_cpmk);
+                $arr['nilai'][] = $nilai;
+            }
+
+            //dd($arr);
         }
-
-        $arr['data_mahasiswa'] = $this->kinumumModel->getDataMahasiswa($nim);
-
-        foreach ($arr['data_rumus_deskriptor'] as $key) {
-            $nilai = $this->kinumumModel->getNilaiCpmkSelect($nim . "_" . $key->id_matakuliah_has_cpmk);
-            $arr['nilai'][] = $nilai;
-        }
-
         return view('vw_template', $arr);
     }
 

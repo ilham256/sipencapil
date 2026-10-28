@@ -5,7 +5,7 @@
 				<div class="row">
 					<div class="col-lg-3 col-6">
 						<!-- small box -->
-						<div class="small-box bg-info">
+						<div class="small-box bg-info"> 
 							<div class="inner">
 								<p>Kurikulum Saat ini</p>
 
@@ -68,6 +68,7 @@
 
 				</div>
 			</div>
+			<?php if ($status == 'tampilkan') { ?>
 
 			<div>				
 				<div class="card" style="">		 
@@ -106,13 +107,14 @@
 					//echo '<pre>';  var_dump($tahun_masuk_select); echo '</pre>'; ?>
 			
 			</div>
+			<?php } ?>	
 		</div>
 		<!-- /.box-content -->
 	</div>
 	
 	<!-- /.col-lg-9 col-xs-12 -->
 </div>
-
+<?php if ($status == 'tampilkan') { ?>
 <script src="<?= base_url('plugin/chart/chartjs/Chart.bundle.min.js') ?>"></script>
 
 <script src="<?= base_url('plugins/jquery/jquery.min.js') ?>"></script>
@@ -249,4 +251,5 @@
 		}
 
 </script>
+<?php } ?>
 <?php  //echo '<pre>';  var_dump($nilai_cpl); echo '</pre>';?>

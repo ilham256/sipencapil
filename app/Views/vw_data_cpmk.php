@@ -54,7 +54,7 @@
 
 				</div>
 			</div>
-
+			<?php if ($status == 'tampilkan') { ?>
 			<div class="container-fluid">
 				<div class="row">
 
@@ -126,7 +126,8 @@
 							</tbody>
 						</table>
 
-				</div>
+			</div>
+			<?php } ?>
 
 		</div>
 		<!-- /.box-content -->

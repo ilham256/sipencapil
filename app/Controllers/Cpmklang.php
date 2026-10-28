@@ -63,6 +63,8 @@ class Cpmklang extends BaseController
             $data_mata_kuliah = $this->request->getPost('mata_kuliah');
             $data['datas'] = $this->cpmklang_model->getcpmklang($data_mata_kuliah);
             $data['data_matakuliah_has_cpmk'] = $this->cpmklang_model->getmatakuliahhascpmk($data_mata_kuliah);
+
+            //dd($data['data_matakuliah_has_cpmk']);
             $data['data_mahasiswa'] = $this->cpmklang_model->getmahasiswa($data_tahun_masuk);
             $data['tahun'] = $data_tahun_masuk;
             $data['simpanan_tahun'] = $data_tahun_masuk;

@@ -35,6 +35,8 @@ class CpmklangModel extends Model
                         ->select('*')
                         ->join('cpmk_langsung', 'cpmk_langsung.id_cpmk_langsung = matakuliah_has_cpmk.id_cpmk_langsung')
                         ->where('kode_mk', $dataMataKuliah)
+                        ->orderBy('LENGTH(cpmk_langsung.id_cpmk_langsung)', 'ASC')
+                        ->orderBy('cpmk_langsung.id_cpmk_langsung', 'ASC')
                         ->get()
                         ->getResult();
     }

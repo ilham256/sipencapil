@@ -37,6 +37,8 @@ class KinumumModel extends Model
         return $this->db->table($this->tableCplLangsung)
             ->select('*')
             ->where('cpl_langsung.kode_kurikulum', $id)
+            ->orderBy('LENGTH(cpl_langsung.id_cpl_langsung)', 'ASC')
+            ->orderBy('cpl_langsung.id_cpl_langsung', 'ASC')
             ->get()
             ->getResult();
     }
@@ -46,6 +48,7 @@ class KinumumModel extends Model
         return $this->db->table($this->tableCplLangsung)
             ->select('*')
             ->where('cpl_langsung.id_cpl_langsung', $id)
+
             ->get()
             ->getRow();
     }
@@ -78,6 +81,8 @@ class KinumumModel extends Model
             ->join($this->tableMatakuliahHasCpmk, 'deskriptor_rumus_cpmk.id_matakuliah_has_cpmk = matakuliah_has_cpmk.id_matakuliah_has_cpmk')
             ->join($this->tableMataKuliah, 'matakuliah_has_cpmk.kode_mk = mata_kuliah.kode_mk')
             ->where('mata_kuliah.kode_kurikulum', $id)
+            ->orderBy('LENGTH(deskriptor_rumus_cpmk.id_deskriptor)', 'ASC')
+            ->orderBy('deskriptor_rumus_cpmk.id_deskriptor', 'ASC')
             ->get()
             ->getResult();
     } 
